@@ -1,0 +1,496 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cherry-team\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-05 18:45+0200\n"
+"PO-Revision-Date: 2015-11-05 18:45+0200\n"
+"Last-Translator: J.L.Dokter <jldokter@gmail.com>\n"
+"Language-Team: Cherry Team <support@cherryframework.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e;__;_n:1,2;_n_noop:1,2;_x:1,2c;_nx:1,2,4c;"
+"_nx_noop:1,2,3c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/includes/class-cherry-team-admin.php:95
+#: public/includes/class-cherry-team-shortcode.php:329
+msgid "Name"
+msgstr "Nom"
+
+#: admin/includes/class-cherry-team-admin.php:96
+#: public/includes/class-cherry-team-shortcode.php:323
+msgid "Photo"
+msgstr "Photo"
+
+#: admin/includes/class-cherry-team-admin.php:97
+msgid "Position"
+msgstr "Poste"
+
+#: admin/includes/class-cherry-team-admin.php:98
+msgid "Group"
+msgstr "Groupe"
+
+#: admin/includes/class-cherry-team-admin.php:99
+msgid "Added"
+msgstr "Ajouté"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:50
+#, php-format
+msgid "Follow %s on Facebook"
+msgstr "Suivez %s sur Facebook"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:55
+#, php-format
+msgid "Follow %s on Twitter"
+msgstr "Suivez %s sur Twitter"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:60
+#, php-format
+msgid "Follow %s on Google +"
+msgstr "Suivez %s sur Google +"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:65
+#, php-format
+msgid "Find %s at LinkedIn"
+msgstr "Trouver %s sur LinkedIn"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:78
+msgid "Team Options"
+msgstr "Options de l'Équipe"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:86
+msgid "Position:"
+msgstr "Poste:"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:94
+msgid "Location:"
+msgstr "Localisation:"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:102
+msgid "Telephone:"
+msgstr "Téléphone:"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:110
+msgid "Email:"
+msgstr "Adresse électronique:"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:118
+msgid "Personal website:"
+msgstr "Site personnel:"
+
+#: admin/includes/class-cherry-team-meta-boxes.php:126
+msgid "Socials:"
+msgstr "Socials:"
+
+#: admin/views/widget.php:11
+msgid "Title:"
+msgstr "Titre:"
+
+#: admin/views/widget.php:16
+msgid "Limit:"
+msgstr "Limite:"
+
+#: admin/views/widget.php:22
+msgid "Show name"
+msgstr "Afficher le nom"
+
+#: admin/views/widget.php:27
+msgid "Show photo"
+msgstr "Afficher la photo"
+
+#: admin/views/widget.php:31
+msgid "Photo Size (in pixels):"
+msgstr "Taille de la Photo (en pixels):"
+
+#: admin/views/widget.php:36
+msgid "Specific ID:"
+msgstr "ID spécifique:"
+
+#: admin/views/widget.php:39
+msgid "Post IDs, separated by commas."
+msgstr "IDs d'article, séparées par des virgules."
+
+#: admin/views/widget.php:42
+msgid "Order By:"
+msgstr "Trier par:"
+
+#: admin/views/widget.php:51
+msgid "Order Direction:"
+msgstr "Direction de l'Ordre"
+
+#: admin/views/widget.php:60
+msgid "Custom CSS Class:"
+msgstr "Classe CSS Personalisée:"
+
+#: cherry-team.php:292
+msgid "Team posts"
+msgstr "Artciles de type Équipe"
+
+#: cherry-team.php:295
+msgid ""
+"You can choose if you want to display sidebars and how you want to display "
+"them."
+msgstr ""
+"Vous pouvez choisir si vous voulez afficher des barres latérales et la façon "
+"dont vous souhaitez les afficher."
+
+#: cherry-team.php:301
+msgid "Left sidebar"
+msgstr "Barre latérale gauche"
+
+#: cherry-team.php:305
+msgid "Right sidebar"
+msgstr "Barre latérale droite"
+
+#: cherry-team.php:309
+msgid "Left and right sidebar"
+msgstr "Barre latérale gauche et droite"
+
+#: cherry-team.php:313
+msgid "Two sidebars on the left"
+msgstr "Deux barres latérales sur le côté gauche"
+
+#: cherry-team.php:317
+msgid "Two sidebars on the right"
+msgstr "Deux barres latérales sur le côté droit"
+
+#: cherry-team.php:321
+msgid "No sidebar"
+msgstr "Sans barre latérale"
+
+#: public/includes/class-cherry-team-registration.php:49
+#: public/includes/class-cherry-team-registration.php:50
+#: public/includes/class-cherry-team-shortcode.php:107
+msgid "Team"
+msgstr "Équipe"
+
+#: public/includes/class-cherry-team-registration.php:51
+msgid "Add New"
+msgstr "Ajouter "
+
+#: public/includes/class-cherry-team-registration.php:52
+msgid "Add New Person"
+msgstr "Ajouter une Nouvelle Personne"
+
+#: public/includes/class-cherry-team-registration.php:53
+msgid "Edit Person"
+msgstr "Modifier la Personne"
+
+#: public/includes/class-cherry-team-registration.php:54
+msgid "New Person"
+msgstr "Nouvelle Personne"
+
+#: public/includes/class-cherry-team-registration.php:55
+msgid "View Person"
+msgstr "Voir la personne"
+
+#: public/includes/class-cherry-team-registration.php:56
+msgid "Search Persons"
+msgstr "Rechercher des personnes"
+
+#: public/includes/class-cherry-team-registration.php:57
+msgid "No persons found"
+msgstr "Aucune personne trouvée"
+
+#: public/includes/class-cherry-team-registration.php:58
+msgid "No persons found in trash"
+msgstr "Aucune personne trouvée dans la corbeille"
+
+#: public/includes/class-cherry-team-registration.php:105
+msgid "Team Groups"
+msgstr "Groupes d'Équipe"
+
+#: public/includes/class-cherry-team-registration.php:106
+#: public/includes/class-cherry-team-registration.php:112
+msgid "Edit Group"
+msgstr "Modifier le Groupe"
+
+#: public/includes/class-cherry-team-registration.php:107
+msgid "Search Groups"
+msgstr "Rechercher des Groupes"
+
+#: public/includes/class-cherry-team-registration.php:108
+msgid "Popular Groups"
+msgstr "Groupes Populaires"
+
+#: public/includes/class-cherry-team-registration.php:109
+msgid "All Groups"
+msgstr "Tous les Groupes"
+
+#: public/includes/class-cherry-team-registration.php:113
+msgid "Update Group"
+msgstr "Mettre à jour le Groupe"
+
+#: public/includes/class-cherry-team-registration.php:114
+msgid "Add New Group"
+msgstr "Ajouter un Nouveau Groupe"
+
+#: public/includes/class-cherry-team-registration.php:115
+msgid "New Group Name"
+msgstr "Nom de Nouveau Groupe"
+
+#: public/includes/class-cherry-team-registration.php:116
+msgid "Separate groups with commas"
+msgstr "Séparer des groupes par des virgules"
+
+#: public/includes/class-cherry-team-registration.php:117
+msgid "Add or remove groups"
+msgstr "Ajouter ou supprimer des gropes"
+
+#: public/includes/class-cherry-team-registration.php:118
+msgid "Choose from the most used groups"
+msgstr "Choisissez parmi les groupes les plus utilisés"
+
+#: public/includes/class-cherry-team-registration.php:119
+msgid "No groups found."
+msgstr "Aucun groupe trouvé."
+
+#: public/includes/class-cherry-team-registration.php:120
+#: public/includes/class-cherry-team-shortcode.php:154
+msgid "Groups"
+msgstr "Groupes"
+
+#: public/includes/class-cherry-team-shortcode.php:108
+msgid "Cherry team shortcode"
+msgstr "Shortcode Cherry de l'équipe "
+
+#: public/includes/class-cherry-team-shortcode.php:118
+msgid "Limit"
+msgstr "Limite"
+
+#: public/includes/class-cherry-team-shortcode.php:119
+msgid "Maximum number of posts."
+msgstr "Nombre maximal d'articles."
+
+#: public/includes/class-cherry-team-shortcode.php:124
+#: public/includes/class-cherry-team-widget.php:307
+msgid "Descending"
+msgstr "Descendant"
+
+#: public/includes/class-cherry-team-shortcode.php:125
+#: public/includes/class-cherry-team-widget.php:306
+msgid "Ascending"
+msgstr "Ascendant "
+
+#: public/includes/class-cherry-team-shortcode.php:128
+msgid "Order"
+msgstr "Ordre"
+
+#: public/includes/class-cherry-team-shortcode.php:129
+msgid "Posts order"
+msgstr "Ordre des articles"
+
+#: public/includes/class-cherry-team-shortcode.php:134
+msgid "None"
+msgstr "Aucun"
+
+#: public/includes/class-cherry-team-shortcode.php:135
+msgid "Post ID"
+msgstr "ID de l'article"
+
+#: public/includes/class-cherry-team-shortcode.php:136
+msgid "Post author"
+msgstr "Auteur de l'article"
+
+#: public/includes/class-cherry-team-shortcode.php:137
+msgid "Post title"
+msgstr "Titre de l'article"
+
+#: public/includes/class-cherry-team-shortcode.php:138
+msgid "Post slug"
+msgstr "Identifiant de l'article"
+
+#: public/includes/class-cherry-team-shortcode.php:139
+msgid "Date"
+msgstr "Date"
+
+#: public/includes/class-cherry-team-shortcode.php:140
+msgid "Last modified date"
+msgstr "Dernière date de modification"
+
+#: public/includes/class-cherry-team-shortcode.php:141
+msgid "Random"
+msgstr "Aléatoire"
+
+#: public/includes/class-cherry-team-shortcode.php:142
+msgid "Comments number"
+msgstr "Nombre de commentaires"
+
+#: public/includes/class-cherry-team-shortcode.php:143
+msgid "Menu order"
+msgstr "Ordre du menu"
+
+#: public/includes/class-cherry-team-shortcode.php:146
+msgid "Order by"
+msgstr "Trier par"
+
+#: public/includes/class-cherry-team-shortcode.php:147
+msgid "Order posts by"
+msgstr "Trier des articles par"
+
+#: public/includes/class-cherry-team-shortcode.php:155
+msgid "Select groups to show team members from"
+msgstr "Choisissez les groups depuis lesquels tirer les membres de l'équipe"
+
+#: public/includes/class-cherry-team-shortcode.php:159
+msgid "Post ID's"
+msgstr "ID's d'article"
+
+#: public/includes/class-cherry-team-shortcode.php:160
+msgid "Enter comma separated ID's of the posts that you want to show"
+msgstr "Entrez ID's d'articles à afficher séparés par des virgules"
+
+#: public/includes/class-cherry-team-shortcode.php:165
+#: public/includes/class-cherry-team-shortcode.php:166
+msgid "Show name?"
+msgstr "Afficher le nom?"
+
+#: public/includes/class-cherry-team-shortcode.php:171
+#: public/includes/class-cherry-team-shortcode.php:172
+msgid "Show photo?"
+msgstr "Afficher la photo?"
+
+#: public/includes/class-cherry-team-shortcode.php:178
+msgid "Featured image size"
+msgstr "Taille de l'Image à la Une"
+
+#: public/includes/class-cherry-team-shortcode.php:179
+msgid "Select size for a Featured image"
+msgstr "Choisir la taille pour l'Image à la Une"
+
+#: public/includes/class-cherry-team-shortcode.php:187
+msgid "Excerpt Length"
+msgstr "Longueur de l'extrait"
+
+#: public/includes/class-cherry-team-shortcode.php:188
+msgid "Excerpt length (if used in template)"
+msgstr "Longueur de l'extrait (si elle est utilisée dans le modèle)"
+
+#: public/includes/class-cherry-team-shortcode.php:198
+msgid "Column class"
+msgstr "Classe de colonne"
+
+#: public/includes/class-cherry-team-shortcode.php:199
+msgid "Column class for each item."
+msgstr "Classe de colonne pour chaque élément."
+
+#: public/includes/class-cherry-team-shortcode.php:207
+msgid "Template"
+msgstr "Modèle"
+
+#: public/includes/class-cherry-team-shortcode.php:208
+msgid "Shortcode template"
+msgstr "Modèle de shortcode"
+
+#: public/includes/class-cherry-team-shortcode.php:212
+msgid "Class"
+msgstr "Classe"
+
+#: public/includes/class-cherry-team-shortcode.php:213
+msgid "Extra CSS class"
+msgstr "Сlasse CSS Extra"
+
+#: public/includes/class-cherry-team-shortcode.php:232
+msgid "Position (Team only)"
+msgstr "Poste (Équipe seulement)"
+
+#: public/includes/class-cherry-team-shortcode.php:238
+msgid "Location (Team only)"
+msgstr "Localisation (Équipe seulement)"
+
+#: public/includes/class-cherry-team-shortcode.php:244
+msgid "Telephone (Team only)"
+msgstr "Téléphone (Équipe seulement)"
+
+#: public/includes/class-cherry-team-shortcode.php:250
+msgid "Email (Team only)"
+msgstr "Email (Équipe seulement)"
+
+#: public/includes/class-cherry-team-shortcode.php:256
+msgid "Personal website (Team only)"
+msgstr "Site personnel (Équipe seulement)"
+
+#: public/includes/class-cherry-team-shortcode.php:262
+msgid "Social (Team only)"
+msgstr "Social (Équipe seulement)"
+
+#: public/includes/class-cherry-team-shortcode.php:335
+msgid "Person description"
+msgstr "Description de la personne"
+
+#: public/includes/class-cherry-team-shortcode.php:341
+msgid "Short description"
+msgstr "Description courte"
+
+#: public/includes/class-cherry-team-shortcode.php:347
+msgid "Person Position"
+msgstr "Poste de la Personne"
+
+#: public/includes/class-cherry-team-shortcode.php:353
+msgid "Person Location"
+msgstr "Localisation de la Personne"
+
+#: public/includes/class-cherry-team-shortcode.php:359
+msgid "Telephone"
+msgstr "Téléphone"
+
+#: public/includes/class-cherry-team-shortcode.php:365
+msgid "Email"
+msgstr "Adresse électronique"
+
+#: public/includes/class-cherry-team-shortcode.php:371
+#: public/includes/class-cherry-team-template-callbacks.php:403
+msgid "Personal website"
+msgstr "Site personnel"
+
+#: public/includes/class-cherry-team-shortcode.php:377
+msgid "Person social links block"
+msgstr "Bloc de liens sociaux de personne"
+
+#: public/includes/class-cherry-team-shortcode.php:383
+msgid "Profile page link"
+msgstr "Lien de la page de profil"
+
+#: public/includes/class-cherry-team-templates.php:69
+msgid "Team Page"
+msgstr "Page d'équipe"
+
+#: public/includes/class-cherry-team-widget.php:42
+msgid "Cherry Team"
+msgstr "Équipe Cherry"
+
+#: public/includes/class-cherry-team-widget.php:45
+msgid "Your site's most recent Team."
+msgstr "Equipe la plus récente de votre site."
+
+#: public/includes/class-cherry-team-widget.php:289
+msgid "No Order"
+msgstr "No Order"
+
+#: public/includes/class-cherry-team-widget.php:290
+msgid "Entry ID"
+msgstr "ID d'entrée"
+
+#: public/includes/class-cherry-team-widget.php:291
+msgid "Title"
+msgstr "Titre"
+
+#: public/includes/class-cherry-team-widget.php:292
+msgid "Date Added"
+msgstr "Date Ajoutée"
+
+#: public/includes/class-cherry-team-widget.php:293
+msgid "Attributes Order"
+msgstr "Attributes Order"
+
+#: public/includes/class-cherry-team-widget.php:294
+msgid "Random Order"
+msgstr "Ordre Aléatoire"

@@ -1,0 +1,11 @@
+<wpml-config>
+	<custom-fields>
+		<custom-field action="copy">_cherry_team</custom-field>
+	</custom-fields>
+	<custom-types>
+		<custom-type translate="1">team</custom-type>
+	</custom-types>
+	<taxonomies>
+		<taxonomy translate="1">group</taxonomy>
+	</taxonomies>
+</wpml-config>
