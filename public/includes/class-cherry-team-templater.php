@@ -205,6 +205,8 @@ class Cherry_Team_Members_Templater {
 
 		if ( file_exists( $upload_dir . $subdir ) ) {
 			$file = $upload_dir . $subdir;
+		} elseif ( $theme_template = locate_template( array( 'cherry-team/' . $template ) ) ) {
+			$file = $theme_template;
 		} elseif ( file_exists( cherry_team_members()->plugin_path( $subdir ) ) ) {
 			$file = cherry_team_members()->plugin_path( $subdir );
 		} else {
