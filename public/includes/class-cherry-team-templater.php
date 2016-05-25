@@ -132,6 +132,7 @@ class Cherry_Team_Members_Templater {
 			'location' => array( $callbacks, 'get_location' ),
 			'phone'    => array( $callbacks, 'get_phone' ),
 			'socials'  => array( $callbacks, 'get_socials' ),
+			'skills'   => array( $callbacks, 'get_skills' ),
 			'link'     => array( $callbacks, 'get_link' ),
 		);
 

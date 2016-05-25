@@ -82,7 +82,7 @@ class Cherry_Team_Members_Init {
 			'capability_type' => 'post',
 			'hierarchical'    => false, // Hierarchical causes memory issues - WP loads all records!
 			'rewrite'         => array(
-				'slug'       => 'team-view',
+				'slug'       => 'team',
 				'with_front' => false,
 				'feeds'      => true,
 			),

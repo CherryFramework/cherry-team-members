@@ -267,6 +267,10 @@ class Cherry_Team_Members_Template_Callbacks {
 		global $post;
 		$socials = get_post_meta( $post->ID, 'cherry-team-social', true );
 
+		if ( empty( $socials ) ) {
+			return;
+		}
+
 		$defaults = array(
 			'icon'  => '',
 			'label' => '',
@@ -301,6 +305,53 @@ class Cherry_Team_Members_Template_Callbacks {
 		}
 
 		return '<div class="team-socials">' . $result . '</div>';
+
+	}
+
+	/**
+	 * Get team member skiils set.
+	 *
+	 * @return string
+	 */
+	public function get_skills() {
+
+		global $post;
+		$skills = get_post_meta( $post->ID, 'cherry-team-skills', true );
+
+		if ( empty( $skills ) ) {
+			return;
+		}
+
+		$defaults = array(
+			'color' => '',
+			'label' => '',
+			'value' => '',
+		);
+
+		$item_format = apply_filters(
+			'cherry_team_skills_format',
+			'<div class="team-skills_item">
+				<div class="team-skills_label">%1$s</div>
+				<div class="team-skills_bar"><span class="team-skills_line" style="background-color:%2$s;width:%3$s%%" data-width="%3$s"></span></div>
+			</div>'
+		);
+
+		$result = '';
+
+		foreach ( $skills as $skill ) {
+
+			$skill = wp_parse_args( $skill, $defaults );
+			$color = esc_attr( $skill['color'] );
+			$label = esc_attr( $skill['label'] );
+			$value = intval( $skill['value'] );
+
+			$label = sprintf( $label, $this->post_title() );
+
+			$result .= sprintf( $item_format, $label, $color, $value );
+
+		}
+
+		return '<div class="team-skills">' . $result . '</div>';
 
 	}
 

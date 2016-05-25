@@ -122,7 +122,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 */
 		public function includes() {
 			require_once( $this->plugin_path( 'public/includes/class-cherry-team-init.php' ) );
-			require_once( $this->plugin_path( 'public/includes/class-cherry-team-templates.php' ) );
+			require_once( $this->plugin_path( 'public/includes/class-cherry-team-templater.php' ) );
 			require_once( $this->plugin_path( 'public/includes/class-cherry-team-data.php' ) );
 			require_once( $this->plugin_path( 'public/includes/class-cherry-team-shortcode.php' ) );
 		}
