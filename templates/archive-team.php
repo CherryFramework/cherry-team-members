@@ -29,14 +29,16 @@ get_header( 'team' );
 
 		global $wp_query;
 
+		$cols = cherry_team_members_tools()->get_cols();
+
 		$args = array(
-			'template'   => 'default.tmpl',
+			'template'   => cherry_team_members_tools()->get_template( 'listing' ),
 			'wrap_class' => 'team-wrap container',
 			'container'  => '<div class="team-listing row">%s</div>',
 			'item_class' => 'team-listing_item',
-			'col_xs'     => '12',
-			'col_sm'     => '6',
-			'col_md'     => '4',
+			'col_xs'     => $cols['xs'],
+			'col_sm'     => $cols['sm'],
+			'col_md'     => $cols['md'],
 			'col_lg'     => false,
 			'size'       => 'thumbnail',
 			'pager'      => true,

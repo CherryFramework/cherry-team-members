@@ -1,0 +1,164 @@
+<?php
+/**
+ * Cherry Team Tools
+ *
+ * @package   Cherry_Team_Members
+ * @author    Cherry Team
+ * @license   GPL-2.0+
+ * @link      http://www.cherryframework.com/
+ * @copyright 2015 Cherry Team
+ */
+
+/**
+ * Register plugin-related tools.
+ *
+ * @since 1.0.0
+ */
+class Cherry_Team_Members_Tools {
+
+	/**
+	 * A reference to an instance of this class.
+	 *
+	 * @since 1.0.0
+	 * @var   object
+	 */
+	private static $instance = null;
+
+	/**
+	 * Returns default page template
+	 *
+	 * @param  string $page Page to get template for.
+	 * @return string
+	 */
+	public function get_template( $page = 'listing' ) {
+
+		$default = array(
+			'listing' => 'default.tmpl',
+			'single'  => 'single.tmpl',
+		);
+
+		$template  = cherry_team_members()->get_option( $page . '-template' );
+		$templates = cherry_team_members_templater()->get_templates_list();
+
+		if ( ! $template || ! isset( $templates[ $template ] ) ) {
+			return $default[ $page ];
+		}
+
+		return $templates[ $template ];
+
+	}
+
+	/**
+	 * Returns column classes for team listing page
+	 *
+	 * @return array
+	 */
+	public function get_cols() {
+
+		$mobile = array(
+			12 => 12,
+			6  => 6,
+			4  => 6,
+			3  => 6,
+		);
+
+		$cols = cherry_team_members()->get_option( 'archive-columns', 3 );
+		$cols = intval( $cols );
+		$cols = ! ( 0 >= $cols || 4 < $cols ) ? $cols : 3;
+		$cols = 12 / $cols;
+
+		return array(
+			'md' => $cols,
+			'sm' => $mobile[ $cols ],
+			'xs' => 12,
+		);
+
+	}
+
+	/**
+	 * Get templates list
+	 *
+	 * @return array
+	 */
+	public function get_templates() {
+
+		$templates = cherry_team_members_templater()->get_templates_list();
+
+		if ( ! is_array( $templates ) ) {
+			return array();
+		}
+
+		$options = array_keys( $templates );
+
+		return array_combine( $options, array_map( 'ucwords', $options ) );
+	}
+
+	/**
+	 * Get pages list
+	 *
+	 * @return array
+	 */
+	public function get_pages() {
+
+		$pages      = get_pages();
+		$pages_list = array( esc_html__( 'Select page...', 'cherry-team' ) );
+
+		foreach ( $pages as $page ) {
+			$pages_list[ $page->ID ] = $page->post_title;
+		}
+
+		return $pages_list;
+	}
+
+	/**
+	 * Returns available image sizes list.
+	 *
+	 * @return array
+	 */
+	public function get_image_sizes() {
+
+		global $_wp_additional_image_sizes;
+
+		$sizes  = get_intermediate_image_sizes();
+		$result = array();
+
+		foreach ( $sizes as $size ) {
+			if ( in_array( $size, array( 'thumbnail', 'medium', 'medium_large', 'large' ) ) ) {
+				$result[ $size ] = ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) );
+			} else {
+				$result[ $size ] = sprintf(
+					'%1$s (%2$sx%3$s)',
+					ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
+					$_wp_additional_image_sizes[ $size ]['width'],
+					$_wp_additional_image_sizes[ $size ]['height']
+				);
+			}
+		}
+
+		return $result;
+
+	}
+
+	/**
+	 * Returns the instance.
+	 *
+	 * @since  1.0.0
+	 * @return object
+	 */
+	public static function get_instance() {
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+		return self::$instance;
+	}
+}
+
+/**
+ * Returns instance of Tools class,
+ *
+ * @return Cherry_Team_Members_Tools
+ */
+function cherry_team_members_tools() {
+	return Cherry_Team_Members_Tools::get_instance();
+}

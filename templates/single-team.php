@@ -39,7 +39,7 @@ get_header( 'team' );
 
 				$args = array(
 					'id'           => get_the_ID(),
-					'template'     => 'single-team.tmpl',
+					'template'     => cherry_team_members_tools()->get_template( 'single' ),
 					'custom_class' => 'team-page-single',
 					'size'         => 'large',
 					'container'    => false,

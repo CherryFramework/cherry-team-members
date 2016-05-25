@@ -269,6 +269,18 @@ class Cherry_Team_Members_Templater {
 	}
 
 	/**
+	 * Returns available templates list
+	 *
+	 * @return array
+	 */
+	public function get_templates_list() {
+		return apply_filters( 'cherry_team_templates_list', array(
+			'default' => 'default.tmpl',
+			'single'  => 'single.tmpl',
+		) );
+	}
+
+	/**
 	 * Returns the instance.
 	 *
 	 * @since  1.0.0

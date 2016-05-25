@@ -63,8 +63,8 @@ class Cherry_Team_Members_Options_Page {
 		'archive-page'       => '',
 		'posts-per-page'     => 9,
 		'archive-columns'    => 3,
-		'single-image-size'  => 'large',
-		'listing-image-size' => 'thumbnail',
+		'single-template'    => 'single',
+		'listing-template'   => 'default',
 	);
 
 	/**
@@ -106,7 +106,7 @@ class Cherry_Team_Members_Options_Page {
 				'description'      => '',
 				'value'            => array(),
 				'options'          => false,
-				'options_callback' => array( $this, 'get_pages' ),
+				'options_callback' => array( cherry_team_members_tools(), 'get_pages' ),
 			),
 			'posts-per-page' => array(
 				'type'       => 'stepper',
@@ -124,23 +124,23 @@ class Cherry_Team_Members_Options_Page {
 				'min_value'  => '1',
 				'step_value' => '1',
 			),
-			'single-image-size' => array(
+			'single-template' => array(
 				'type'             => 'select',
-				'title'            => esc_html__( 'Select picture size for single team member page', 'cherry-team' ),
+				'title'            => esc_html__( 'Select template for single team member page', 'cherry-team' ),
 				'label'            => '',
 				'description'      => '',
-				'value'            => self::$default_options['single-image-size'],
+				'value'            => self::$default_options['single-template'],
 				'options'          => false,
-				'options_callback' => array( $this, 'get_image_sizes' ),
+				'options_callback' => array( cherry_team_members_tools(), 'get_templates' ),
 			),
-			'listing-image-size' => array(
+			'listing-template' => array(
 				'type'             => 'select',
-				'title'            => esc_html__( 'Select picture size for single team member page', 'cherry-team' ),
+				'title'            => esc_html__( 'Select template for team listing page', 'cherry-team' ),
 				'label'            => '',
 				'description'      => '',
-				'value'            => self::$default_options['listing-image-size'],
+				'value'            => self::$default_options['lisitng-template'],
 				'options'          => false,
-				'options_callback' => array( $this, 'get_image_sizes' ),
+				'options_callback' => array( cherry_team_members_tools(), 'get_templates' ),
 			),
 		);
 
@@ -154,52 +154,6 @@ class Cherry_Team_Members_Options_Page {
 		);
 
 		return true;
-	}
-
-	/**
-	 * Get pages list
-	 *
-	 * @return array
-	 */
-	public function get_pages() {
-
-		$pages      = get_pages();
-		$pages_list = array( esc_html__( 'Select page...', 'cherry-team' ) );
-
-		foreach ( $pages as $page ) {
-			$pages_list[ $page->ID ] = $page->post_title;
-		}
-
-		return $pages_list;
-	}
-
-	/**
-	 * Returns available image sizes list.
-	 *
-	 * @return array
-	 */
-	public function get_image_sizes() {
-
-		global $_wp_additional_image_sizes;
-
-		$sizes  = get_intermediate_image_sizes();
-		$result = array();
-
-		foreach ( $sizes as $size ) {
-			if ( in_array( $size, array( 'thumbnail', 'medium', 'medium_large', 'large' ) ) ) {
-				$result[ $size ] = ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) );
-			} else {
-				$result[ $size ] = sprintf(
-					'%1$s (%2$sx%3$s)',
-					ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
-					$_wp_additional_image_sizes[ $size ]['width'],
-					$_wp_additional_image_sizes[ $size ]['height']
-				);
-			}
-		}
-
-		return $result;
-
 	}
 
 	/**
@@ -254,7 +208,7 @@ class Cherry_Team_Members_Options_Page {
 	public function render_page() {
 		add_menu_page(
 			esc_html__( 'Cherry Team Options', 'cherry-team' ),
-			esc_html__( 'Cherry Team Options', 'cherry-team' ),
+			esc_html__( 'Cherry Team', 'cherry-team' ),
 			'edit_theme_options',
 			$this->page_slug,
 			array( $this, 'options_page' ),
