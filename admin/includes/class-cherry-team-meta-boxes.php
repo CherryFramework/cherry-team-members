@@ -172,7 +172,9 @@ class Cherry_Team_Members_Meta_Boxes {
 	 */
 	public function enqueue_styles( $hook_suffix ) {
 
-		if ( 'post.php' !== $hook_suffix || cherry_team_members_init()->name() !== get_post_type() ) {
+		$allowed_pages = array( 'post-new.php', 'post.php' );
+
+		if ( ! in_array( $hook_suffix, $allowed_pages ) || cherry_team_members_init()->name() !== get_post_type() ) {
 			return;
 		}
 

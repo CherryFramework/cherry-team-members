@@ -138,7 +138,7 @@ class Cherry_Team_Members_Options_Page {
 				'title'            => esc_html__( 'Select template for team listing page', 'cherry-team' ),
 				'label'            => '',
 				'description'      => '',
-				'value'            => self::$default_options['lisitng-template'],
+				'value'            => self::$default_options['listing-template'],
 				'options'          => false,
 				'options_callback' => array( cherry_team_members_tools(), 'get_templates' ),
 			),

@@ -131,8 +131,10 @@ class Cherry_Team_Members_Template_Callbacks {
 		global $post;
 
 		$args = wp_parse_args( $args, array(
-			'size' => 'thumbnail',
-			'link' => true
+			'wrap'  => 'div',
+			'class' => '',
+			'size'  => 'thumbnail',
+			'link'  => true
 		) );
 
 		$photo = $this->post_image();
@@ -163,8 +165,15 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * @since  1.0.0
 	 * @return string
 	 */
-	public function get_name() {
+	public function get_name( $args = array() ) {
 		global $post;
+
+		$args = wp_parse_args( $args, array(
+			'wrap'  => 'div',
+			'class' => '',
+			'link'  => false
+		) );
+
 		if ( true === $this->atts['show_name'] ) {
 			return $this->post_title();
 		}
@@ -176,7 +185,13 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * @since 1.0.0
 	 * @return string
 	 */
-	public function get_position() {
+	public function get_position( $args = array() ) {
+
+		$args = wp_parse_args( $args, array(
+			'wrap'  => 'div',
+			'class' => '',
+		) );
+
 		return $this->get_meta_html( 'position' );
 	}
 
@@ -186,7 +201,13 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * @since  1.0.0
 	 * @return string
 	 */
-	public function get_location() {
+	public function get_location( $args = array() ) {
+
+		$args = wp_parse_args( $args, array(
+			'wrap'  => 'div',
+			'class' => '',
+		) );
+
 		return $this->get_meta_html( 'location' );
 	}
 
@@ -200,6 +221,12 @@ class Cherry_Team_Members_Template_Callbacks {
 		return $this->get_meta_html( 'telephone' );
 	}
 
+	/**
+	 * Gets metadata by name and return HTML markup
+	 *
+	 * @param  string $meta Meta name to get
+	 * @return string
+	 */
 	public function get_meta_html( $meta ) {
 		global $post;
 		$value = get_post_meta( $post->ID, 'cherry-team-' . $meta, true );
@@ -212,9 +239,14 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * @since 1.0.0
 	 * @return string
 	 */
-	public function get_excerpt() {
+	public function get_excerpt( $args = array() ) {
 
 		global $post;
+
+		$args = wp_parse_args( $args, array(
+			'wrap'  => 'div',
+			'class' => '',
+		) );
 
 		$excerpt = has_excerpt( $post->ID ) ? apply_filters( 'the_excerpt', get_the_excerpt() ) : '';
 
@@ -262,9 +294,15 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * @since  1.0.0
 	 * @return string
 	 */
-	public function get_socials() {
+	public function get_socials( $args = array() ) {
 
 		global $post;
+
+		$args = wp_parse_args( $args, array(
+			'wrap'  => 'div',
+			'class' => '',
+		) );
+
 		$socials = get_post_meta( $post->ID, 'cherry-team-social', true );
 
 		if ( empty( $socials ) ) {
@@ -384,6 +422,26 @@ class Cherry_Team_Members_Template_Callbacks {
 		}
 
 		return sprintf( '<span class="%s">%s</span>', $css_class, $value );
+
+	}
+
+	/**
+	 * Wrap macros output into wrapper passed via arguments
+	 *
+	 * @param  array  $args   Arguments array.
+	 * @param  string $string Macros string to wrap.
+	 * @return string
+	 */
+	public function macros_wrap( $args = array(), $string = '' ) {
+
+		if ( ! $string ) {
+			return '';
+		}
+
+		$tag   = ! empty( $args['wrap'] ) ? esc_attr( $args['wrap'] ) : 'div';
+		$class = ! empty( $args['class'] ) ? esc_attr( $args['class'] ) : '';
+
+		return sprintf( '<%1$s class="%2$s">%3$s</%1$s>', $tag, $class, $string );
 
 	}
 

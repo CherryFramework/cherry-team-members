@@ -111,6 +111,35 @@ class Cherry_Team_Members_Tools {
 	}
 
 	/**
+	 * Returns groups list
+	 *
+	 * @return array
+	 */
+	public function get_groups() {
+
+		global $wp_version;
+
+		if ( version_compare( $wp_version, '4.5.0', '>=' ) ) {
+			$groups = get_terms( 'group', array(
+				'hide_empty' => false,
+			) );
+		} else {
+			$groups = get_terms( array(
+				'taxonomy'   => 'group',
+				'hide_empty' => false,
+			) );
+		}
+
+		if ( ! $groups ) {
+			return array();
+		}
+
+		$groups = wp_list_pluck( $groups, 'name', 'term_id' );
+
+		return $groups;
+	}
+
+	/**
 	 * Returns available image sizes list.
 	 *
 	 * @return array

@@ -81,7 +81,7 @@ class Cherry_Team_Members_Templater {
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 
-		} elseif ( is_post_type_archive( 'product' ) || is_page( get_option( 'archive-page' ) ) ) {
+		} elseif ( is_post_type_archive( 'product' ) ) {
 
 			$file 	= 'archive-team.php';
 			$find[] = $file;

@@ -22,7 +22,7 @@ class Cherry_Team_Members_Shortcode {
 	 * @since 1.0.0
 	 * @var   string
 	 */
-	public static $name = 'team';
+	public static $name = 'cherry_team';
 
 	/**
 	 * A reference to an instance of this class.
@@ -48,13 +48,6 @@ class Cherry_Team_Members_Shortcode {
 
 		// Register shortcode on 'init'.
 		add_action( 'init', array( $this, 'register_shortcode' ) );
-
-		// Register shortcode and add it to the dialog.
-		add_filter( 'cherry_shortcodes/data/shortcodes', array( $this, 'shortcodes' ) );
-		add_filter( 'cherry_templater/data/shortcodes',  array( $this, 'shortcodes' ) );
-
-		add_filter( 'cherry_templater_target_dirs', array( $this, 'add_target_dir' ), 11 );
-		add_filter( 'cherry_templater_macros_buttons', array( $this, 'add_macros_buttons' ), 11, 2 );
 
 		$this->data = Cherry_Team_Members_Data::get_instance();
 	}
@@ -219,108 +212,6 @@ class Cherry_Team_Members_Shortcode {
 	}
 
 	/**
-	 * Adds team template directory to shortcodes templater
-	 *
-	 * @since  1.0.0
-	 * @param  array $target_dirs existing target dirs.
-	 * @return array
-	 */
-	public function add_target_dir( $target_dirs ) {
-
-		array_push( $target_dirs, cherry_team_members()->plugin_path() );
-		return $target_dirs;
-
-	}
-
-	/**
-	 * Add team shortcode macros buttons to templater
-	 *
-	 * @since  1.0.0
-	 *
-	 * @param  array  $macros_buttons current buttons array.
-	 * @param  string $shortcode      shortcode name.
-	 * @return array
-	 */
-	public function add_macros_buttons( $macros_buttons, $shortcode ) {
-
-		if ( self::$name != $shortcode ) {
-			return $macros_buttons;
-		}
-
-		$macros_buttons = array(
-			'photo' => array(
-				'id'    => 'cherry_photo',
-				'value' => __( 'Photo', 'cherry-team' ),
-				'open'  => '%%PHOTO%%',
-				'close' => '',
-			),
-			'name' => array(
-				'id'    => 'cherry_name',
-				'value' => __( 'Name', 'cherry-team' ),
-				'open'  => '%%NAME%%',
-				'close' => '',
-			),
-			'content' => array(
-				'id'    => 'cherry_content',
-				'value' => __( 'Person description', 'cherry-team' ),
-				'open'  => '%%CONTENT%%',
-				'close' => '',
-			),
-			'excerpt' => array(
-				'id'    => 'cherry_excerpt',
-				'value' => __( 'Short description', 'cherry-team' ),
-				'open'  => '%%EXCERPT%%',
-				'close' => '',
-			),
-			'position' => array(
-				'id'    => 'cherry_position',
-				'value' => __( 'Person Position', 'cherry-team' ),
-				'open'  => '%%POSITION%%',
-				'close' => '',
-			),
-			'location' => array(
-				'id'    => 'cherry_location',
-				'value' => __( 'Person Location', 'cherry-team' ),
-				'open'  => '%%LOCATION%%',
-				'close' => '',
-			),
-			'phone' => array(
-				'id'    => 'cherry_phone',
-				'value' => __( 'Telephone', 'cherry-team' ),
-				'open'  => '%%PHONE%%',
-				'close' => '',
-			),
-			'email' => array(
-				'id'    => 'cherry_email',
-				'value' => __( 'Email', 'cherry-team' ),
-				'open'  => '%%EMAIL%%',
-				'close' => '',
-			),
-			'website' => array(
-				'id'    => 'cherry_website',
-				'value' => __( 'Personal website', 'cherry-team' ),
-				'open'  => '%%WEBSITE%%',
-				'close' => '',
-			),
-			'socials' => array(
-				'id'    => 'cherry_socials',
-				'value' => __( 'Person social links block', 'cherry-team' ),
-				'open'  => '%%SOCIALS%%',
-				'close' => '',
-			),
-			'link' => array(
-				'id'    => 'cherry_link',
-				'value' => __( 'Profile page link', 'cherry-team' ),
-				'open'  => '%%LINK%%',
-				'close' => '',
-			),
-		);
-
-		return $macros_buttons;
-
-	}
-
-	/**
 	 * The shortcode function.
 	 *
 	 * @since  1.0.0
@@ -329,26 +220,30 @@ class Cherry_Team_Members_Shortcode {
 	 * @param  string $shortcode The shortcode tag, useful for shared callback functions.
 	 * @return string
 	 */
-	public function do_shortcode( $atts, $content = null, $shortcode = 'team' ) {
+	public function do_shortcode( $atts, $content = null, $shortcode = 'cherry_team' ) {
 
 		// Set up the default arguments.
 		$defaults = array(
-			'limit'          => 3,
-			'orderby'        => 'date',
-			'order'          => 'DESC',
+			'super_title'    => '',
+			'title'          => '',
+			'subtitle'       => '',
+			'columns'        => 3,
+			'columns_tablet' => 2,
+			'columns_phone'  => 1,
+			'posts_per_page' => 6,
 			'group'          => '',
 			'id'             => 0,
+			'excerpt_length' => 20,
+			'more'           => '',
+			'more_text'      => '',
+			'more_url'       => '',
 			'show_name'      => true,
 			'show_photo'     => true,
+			'show_desc'      => true,
+			'show_position'  => true,
+			'show_social'    => true,
 			'size'           => 'thumbnail',
-			'excerpt_length' => 20,
-			'echo'           => false,
-			'template'       => 'default.tmpl',
-			'col_xs'         => '12',
-			'col_sm'         => '6',
-			'col_md'         => '3',
-			'col_lg'         => 'none',
-			'class'          => '',
+			'layout'         => 'default',
 		);
 
 		/**
@@ -358,12 +253,9 @@ class Cherry_Team_Members_Shortcode {
 		 */
 		$atts = shortcode_atts( $defaults, $atts, $shortcode );
 
-		// Make sure we return and don't echo.
-		$atts['echo'] = false;
-
 		// Fix integers.
-		if ( isset( $atts['limit'] ) ) {
-			$atts['limit'] = intval( $atts['limit'] );
+		if ( isset( $atts['posts_per_page'] ) ) {
+			$atts['posts_per_page'] = intval( $atts['posts_per_page'] );
 		}
 
 		if ( isset( $atts['size'] ) &&  ( 0 < intval( $atts['size'] ) ) ) {
@@ -372,18 +264,71 @@ class Cherry_Team_Members_Shortcode {
 			$atts['size'] = esc_attr( $atts['size'] );
 		}
 
-		// Fix booleans.
-		foreach ( array( 'show_name', 'show_photo' ) as $k => $v ) :
+		// Fix columns
+		foreach ( array( 'columns', 'columns_tablet', 'columns_phone' ) as $col ) {
+			$atts[ $col ] = ( 0 !== intval( $atts[ $col ] ) ) ? round( 12 / $atts[ $col ] ) : 3;
+		}
 
-			if ( isset( $atts[ $v ] ) && ( 'true' == $atts[ $v ] || 'yes' == $atts[ $v ] ) ) {
-				$atts[ $v ] = true;
-			} else {
-				$atts[ $v ] = false;
+		$templates      = cherry_team_members_templater()->get_templates_list();
+		$atts['layout'] = isset( $templates['layout'] ) ? $templates['layout'] : 'default.tmpl';
+
+		// Fix booleans.
+		foreach ( array( 'show_name', 'show_photo', 'show_desc', 'show_position', 'show_social' ) as $v ) {
+			$atts[ $v ] = filter_var( $atts[ $v ], FILTER_VALIDATE_BOOLEAN );
+		}
+
+		$relations = array(
+			'limit'          => 'posts_per_page',
+			'id'             => 'id',
+			'group'          => 'group',
+			'size'           => 'thumbnail',
+			'excerpt_length' => 'excerpt_length',
+			'col_xs'         => 'columns_phone',
+			'col_sm'         => 'columns_tablet',
+			'col_md'         => 'columns',
+			'show_name'      => 'show_name',
+			'show_photo'     => 'show_photo',
+			'show_desc'      => 'show_desc',
+			'show_position'  => 'show_position',
+			'show_social'    => 'show_social',
+			'template'       => 'layout',
+		);
+
+		foreach ( $relations as $data_key => $atts_key ) {
+
+			if ( ! isset( $atts[ $atts_key ] ) ) {
+				continue;
 			}
 
-		endforeach;
+			$data_args[ $data_key ] = $atts[ $atts_key ];
+		}
 
-		return $this->data->the_team( $atts );
+		// Make sure we return and don't echo.
+		$data_args['echo'] = false;
+
+		$before = '<div class="team-container">';
+
+		$heading = apply_filters(
+			'cherry_team_shortcode_heading_format',
+			array(
+				'super_title' => '<h5 class="team-heading_super_title">%s</h5>',
+				'title'       => '<h3 class="team-heading_title">%s</h3>',
+				'subtitle'    => '<h6 class="team-heading_subtitle">%s</h6>',
+			)
+		);
+
+		foreach ( $heading as $item => $format ) {
+
+			if ( empty( $atts[ $item ] ) ) {
+				continue;
+			}
+
+			$before .= sprintf( $format, $atts[ $item ] );
+		}
+
+		$after = '</div>';
+
+		return $before . $this->data->the_team( $data_args ) . $after;
 	}
 
 	/**
