@@ -165,7 +165,9 @@ class Cherry_Team_Members_Data {
 		$args['more'] = filter_var( $args['more'], FILTER_VALIDATE_BOOLEAN );
 
 		// The Display.
-		if ( is_wp_error( $query ) ) {
+		if ( ! $query || is_wp_error( $query ) ) {
+			$wp_query = null;
+			$wp_query = $this->temp_query;
 			return;
 		}
 
