@@ -190,8 +190,9 @@ class Cherry_Team_Members_Data {
 		$paged = $query->get( 'paged' );
 
 		$pager_atts_array = array(
-			'data-pages' => $query->max_num_pages,
-			'data-page'  => ! empty( $paged ) ? $paged : 1,
+			'data-pages'  => $query->max_num_pages,
+			'data-page'   => ! empty( $paged ) ? $paged : 1,
+			'data-groups' => $args['group'],
 		);
 
 		$pager_atts = $this->parse_atts( $pager_atts_array );
@@ -696,12 +697,22 @@ class Cherry_Team_Members_Data {
 			return;
 		}
 
+		$groups = array();
+		if ( ! empty( $atts['group'] ) ) {
+			$groups = explode( ',', $atts['group'] );
+		}
+
 		$item_format = '<li class="cherry-team-filter_item"><a href="#!%1$s" class="cherry-team-filter_link" data-term="%1$s">%2$s</a></li>';
 		$terms       = get_terms( 'group' );
 		$result      = sprintf( $item_format, 'all-groups', __( 'All', 'cherry-team' ) );
 
 		if ( ! empty( $terms ) ) {
 			foreach ( $terms as $term ) {
+
+				if ( ! empty( $groups ) && ! in_array( $term->slug, $groups ) ) {
+					continue;
+				}
+
 				$result .= sprintf( $item_format, $term->slug, $term->name );
 			}
 		}

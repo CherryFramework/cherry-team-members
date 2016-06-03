@@ -86,6 +86,23 @@ if ( ! class_exists( 'Cherry_Team_Members_Ajax' ) ) {
 		}
 
 		/**
+		 * Maybe add selected groups into filter
+		 *
+		 * @return string
+		 */
+		public function maybe_add_groups() {
+
+			$group = '';
+
+			if ( isset( $_POST['groups'] ) ) {
+				$group = esc_attr( $_POST['groups'] );
+			}
+
+			return $group;
+
+		}
+
+		/**
 		 * Filter posts callback
 		 *
 		 * @return void
@@ -101,7 +118,7 @@ if ( ! class_exists( 'Cherry_Team_Members_Ajax' ) ) {
 			$atts['paged'] = 1;
 
 			if ( 'all-groups' === $group ) {
-				$atts['group'] = '';
+				$atts['group'] = $this->maybe_add_groups();
 			} else {
 				$atts['group'] = $group;
 			}
