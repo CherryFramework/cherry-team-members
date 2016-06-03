@@ -60,6 +60,7 @@
 		clear: both;
 		content: "";
 	}
+	padding-bottom: 30px;
 }
 
 .team-listing {
@@ -107,6 +108,7 @@
 	}
 	&_photo {
 		text-align: center;
+		padding: 0 0 15px;
 		img {
 			margin: 0 auto;
 		}
@@ -201,5 +203,96 @@ $icon-size: 40px;
 	}
 	&_item {
 		padding: 0 0 10px;
+	}
+}
+
+.cherry-team {
+	position: relative;
+	.team-listing {
+		transition: all 300ms linear;
+		opacity: 1;
+	}
+	&.in-progress {
+		.team-listing {
+			opacity: 0;
+		}
+	}
+}
+
+.cherry-team-filter {
+	padding: 0 0 20px;
+	margin: 0;
+	&_item {
+		display: inline-block;
+		margin: 0 20px 0 0;
+	}
+}
+
+.ajax-more-btn {
+	&.btn-hidden {
+		display: none;
+	}
+}
+
+.team-loader{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	.cherry-spinner{
+		width: 90px;
+		height: 90px;
+		left: 50%;
+		top: 50%;
+		margin-left: -45px;
+		margin-top: -45px;
+		display: block;
+		position: relative;
+	}
+	&.loader-small {
+		bottom: 0;
+		top: auto;
+		.cherry-spinner {
+			width: 40px;
+			height: 40px;
+			margin-left: -20px;
+			margin-top: -20px;
+		}
+	}
+}
+
+.cherry-spinner-double-bounce.cherry-spinner {
+	position: relative;
+}
+.cherry-spinner-double-bounce .cherry-double-bounce1, .cherry-spinner-double-bounce .cherry-double-bounce2 {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: currentColor;
+	opacity: 0.6;
+	position: absolute;
+	top: 0;
+	left: 0;
+	animation: cherry-doubleBounce 2s infinite ease-in-out;
+}
+
+.cherry-spinner-double-bounce .cherry-double-bounce2 {
+	animation-delay: -1s;
+}
+
+@-webkit-keyframes cherry-doubleBounce {
+	0%, 100% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1);
+	}
+}
+@keyframes cherry-doubleBounce {
+	0%, 100% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1);
 	}
 }

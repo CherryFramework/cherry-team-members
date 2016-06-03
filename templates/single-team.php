@@ -44,6 +44,8 @@ get_header( 'team' );
 					'size'         => 'large',
 					'container'    => false,
 					'item_class'   => 'team-single-item',
+					'pager'        => false,
+					'more'         => false,
 				);
 				$data = new Cherry_Team_Members_Data;
 				$data->the_team( $args );

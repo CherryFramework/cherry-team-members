@@ -64,31 +64,34 @@ class Cherry_Team_Members_Templater {
 
 		if ( is_single() && cherry_team_members_init()->name() === get_post_type() ) {
 
-			$file 	= 'single-team.php';
+			$file   = 'single-team.php';
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 
 		} elseif ( is_tax( 'group' ) ) {
 
-			$term   = get_queried_object();
+			$term = get_queried_object();
+			$file = 'archive-team.php';
 
-			$file = 'taxonomy-' . $term->taxonomy . '.php';
+			$file_term = 'taxonomy-' . $term->taxonomy . '.php';
 
 			$find[] = 'taxonomy-' . $term->taxonomy . '-' . $term->slug . '.php';
 			$find[] = cherry_team_members()->template_path() . 'taxonomy-' . $term->taxonomy . '-' . $term->slug . '.php';
 			$find[] = 'taxonomy-' . $term->taxonomy . '.php';
 			$find[] = cherry_team_members()->template_path() . 'taxonomy-' . $term->taxonomy . '.php';
+			$find[] = $file_term;
+			$find[] = cherry_team_members()->template_path() . $file_term;
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 
-		} elseif ( is_post_type_archive( 'product' ) ) {
+		} elseif ( is_post_type_archive( cherry_team_members_init()->name() ) ) {
 
 			$file 	= 'archive-team.php';
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 
 		} elseif ( cherry_team_members()->get_option( 'archive-page' ) && is_page( cherry_team_members()->get_option( 'archive-page' ) ) ) {
-			$file 	= 'archive-team.php';
+			$file   = 'archive-team.php';
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 		}

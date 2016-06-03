@@ -169,6 +169,23 @@ class Cherry_Team_Members_Tools {
 	}
 
 	/**
+	 * Prints current page title.
+	 *
+	 * @return void
+	 */
+	public function page_title( $format = '%s' ) {
+
+		$object = get_queried_object();
+
+		if ( isset( $object->post_title ) ) {
+			printf( $format, $object->post_title );
+		} elseif ( isset( $object->name ) ) {
+			printf( $format, $object->name );
+		}
+
+	}
+
+	/**
 	 * Returns the instance.
 	 *
 	 * @since  1.0.0

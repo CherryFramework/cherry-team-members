@@ -58,13 +58,11 @@ class Cherry_Team_Members_Data {
 	}
 
 	/**
-	 * Display or return HTML-formatted team.
+	 * Returns plugin default attributes.
 	 *
-	 * @since  1.0.0
-	 * @param  string|array $args Arguments.
-	 * @return string
+	 * @return array
 	 */
-	public function the_team( $args = '' ) {
+	public function get_defaults() {
 
 		/**
 		 * Filter the array of default arguments.
@@ -73,17 +71,22 @@ class Cherry_Team_Members_Data {
 		 * @param array Default arguments.
 		 * @param array The 'the_team' function argument.
 		 */
-		$defaults = apply_filters( 'cherry_the_team_default_args', array(
+		return apply_filters( 'cherry_the_team_default_args', array(
 			'limit'          => 3,
 			'orderby'        => 'date',
 			'order'          => 'DESC',
 			'group'          => '',
 			'id'             => 0,
+			'more'           => true,
+			'more_text'      => __( 'More', 'cherry-team' ),
+			'more_url'       => '#',
+			'ajax_more'      => true,
 			'show_name'      => true,
 			'show_photo'     => true,
 			'show_desc'      => true,
 			'show_position'  => true,
 			'show_social'    => true,
+			'show_filters'   => false,
 			'size'           => 'thumbnail',
 			'echo'           => true,
 			'title'          => '',
@@ -96,12 +99,33 @@ class Cherry_Team_Members_Data {
 			'before_title'   => '<h2>',
 			'after_title'    => '</h2>',
 			'pager'          => false,
+			'paged'          => 1,
 			'template'       => 'default.tmpl',
 			'item_class'     => 'team-item',
 			'container'      => '<div class="team-listing row">%s</div>',
-		), $args );
+		) );
+	}
 
-		$args = wp_parse_args( $args, $defaults );
+	/**
+	 * Enqueue team related scripts when required
+	 *
+	 * @return void
+	 */
+	public function enqueue_related_scripts() {
+		wp_enqueue_script( 'cherry-team' );
+	}
+
+	/**
+	 * Display or return HTML-formatted team.
+	 *
+	 * @since  1.0.0
+	 * @param  string|array $args Arguments.
+	 * @return string
+	 */
+	public function the_team( $args = '' ) {
+
+		$defaults = $this->get_defaults();
+		$args     = wp_parse_args( $args, $defaults );
 
 		/**
 		 * Filter the array of arguments.
@@ -120,6 +144,8 @@ class Cherry_Team_Members_Data {
 		 */
 		do_action( 'cherry_team_before', $args );
 
+		$output .= $this->get_filters( $args );
+
 		// The Query.
 		$query = $this->get_team( $args );
 
@@ -136,12 +162,14 @@ class Cherry_Team_Members_Data {
 			$args['pager'] = false;
 		}
 
+		$args['more'] = filter_var( $args['more'], FILTER_VALIDATE_BOOLEAN );
+
 		// The Display.
 		if ( is_wp_error( $query ) ) {
 			return;
 		}
 
-		$css_classes = array();
+		$css_classes = array( 'cherry-team' );
 
 		if ( ! empty( $args['wrap_class'] ) ) {
 			$css_classes[] = esc_attr( $args['wrap_class'] );
@@ -157,8 +185,20 @@ class Cherry_Team_Members_Data {
 
 		$css_class = implode( ' ', $css_classes );
 
+		$paged = $query->get( 'paged' );
+
+		$pager_atts_array = array(
+			'data-pages' => $query->max_num_pages,
+			'data-page'  => ! empty( $paged ) ? $paged : 1,
+		);
+
+		$pager_atts = $this->parse_atts( $pager_atts_array );
+
 		// Open wrapper.
-		$output .= sprintf( '<div class="%s">', $css_class );
+		$output .= sprintf(
+			'<div class="%1$s" data-atts=\'%2$s\' %3$s>',
+			$css_class, json_encode( $args ), $pager_atts
+		);
 
 		if ( ! empty( $args['title'] ) ) {
 			$output .= $args['before_title'] . $args['title'] . $args['after_title'];
@@ -173,8 +213,10 @@ class Cherry_Team_Members_Data {
 		// Close wrapper.
 		$output .= '</div>';
 
-		if ( true == $args['pager'] ) {
-			$output .= get_the_posts_pagination();
+		if ( true == $args['more'] ) {
+			$output .= $this->get_more_button( $args );
+		} elseif ( true === $args['pager'] ) {
+			$output .= $this->get_pagination();
 		}
 
 		$wp_query = null;
@@ -237,6 +279,10 @@ class Cherry_Team_Members_Data {
 		 */
 		$args = apply_filters( 'cherry_get_team_args', $args );
 
+		if ( 0 === $args['limit'] ) {
+			$args['limit'] = -1;
+		}
+
 		// The Query Arguments.
 		$this->query_args['post_type']        = cherry_team_members_init()->name();
 		$this->query_args['posts_per_page']   = $args['limit'];
@@ -261,7 +307,9 @@ class Cherry_Team_Members_Data {
 			$this->query_args['tax_query'] = false;
 		}
 
-		if ( isset( $args['pager'] ) && ( 'true' == $args['pager'] ) ) :
+		$args['pager'] = filter_var( $args['pager'], FILTER_VALIDATE_BOOLEAN );
+
+		if ( isset( $args['pager'] ) && ( true === $args['pager'] ) ) {
 
 			if ( get_query_var( 'paged' ) ) {
 				$this->query_args['paged'] = get_query_var( 'paged' );
@@ -271,7 +319,9 @@ class Cherry_Team_Members_Data {
 				$this->query_args['paged'] = 1;
 			}
 
-		endif;
+		} elseif ( ! empty( $args['paged'] ) ) {
+			$this->query_args['paged'] = intval( $args['paged'] );
+		}
 
 		$ids = explode( ',', $args['id'] );
 
@@ -332,6 +382,93 @@ class Cherry_Team_Members_Data {
 		}
 
 		return $query;
+
+	}
+
+	/**
+	 * Return more button HTML markup
+	 *
+	 * @return string
+	 */
+	public function get_more_button( $atts = array(), $query = null ) {
+
+		if ( ! $query ) {
+			global $wp_query;
+			$query = $wp_query;
+		}
+
+		if ( 1 >= $query->max_num_pages ) {
+			return;
+		}
+
+		$this->enqueue_related_scripts();
+
+		$atts = wp_parse_args( $atts, array(
+			'more_text' => __( 'More', 'cherry-team' ),
+			'more_url'  => '#',
+			'ajax_more' => true,
+		) );
+
+		$format = '<div class="team-more-btn"><a href="%2$s" class="btn btn-primary %3$s">%1$s</a></div>';
+
+		if ( true === $atts['ajax_more'] ) {
+			$more_class = 'ajax-more-btn';
+		} else {
+			$more_class = '';
+		}
+
+		return sprintf( $format, $atts['more_text'], $atts['more_url'], $more_class );
+
+	}
+
+	/**
+	 * Get team pagination
+	 *
+	 * @return string
+	 */
+	public function get_pagination( $query = null ) {
+
+		if ( ! $query ) {
+			global $wp_query;
+			$query = $wp_query;
+		}
+
+		if ( 1 >= $query->max_num_pages ) {
+			return;
+		}
+
+		$this->enqueue_related_scripts();
+
+		$format = '<a href="#" data-page="%1$s" class="page-numbers%2$s">%1$s</a>';
+		$links  = '';
+
+		for ( $i = 1; $i <= $query->max_num_pages; $i++ ) {
+			$links .= sprintf( $format, $i, ( 1 === $i ? ' current' : '' ) );
+		}
+
+		return sprintf( '<div class="team-ajax-pager"><div class="nav-links">%s</div></div>', $links );
+
+	}
+
+	/**
+	 * Implode attributes array into string
+	 *
+	 * @param  array $atts Attributes array.
+	 * @return string
+	 */
+	public function parse_atts( $atts = array() ) {
+
+		if ( empty( $atts ) || ! is_array( $atts ) ) {
+			return '';
+		}
+
+		$result = '';
+
+		foreach ( $atts as $name => $value ) {
+			$result .= ' ' . $name . '="' . esc_attr( $value ) . '"';
+		}
+
+		return $result;
 
 	}
 
@@ -543,6 +680,33 @@ class Cherry_Team_Members_Data {
 		}
 
 		return $urls;
+
+	}
+
+	/**
+	 * Returns group filters html markup.
+	 *
+	 * @return string
+	 */
+	public function get_filters( $atts ) {
+
+		if ( ! isset( $atts['show_filters'] ) || true !== $atts['show_filters'] ) {
+			return;
+		}
+
+		$item_format = '<li class="cherry-team-filter_item"><a href="#!%1$s" class="cherry-team-filter_link" data-term="%1$s">%2$s</a></li>';
+		$terms       = get_terms( 'group' );
+		$result      = sprintf( $item_format, 'all-groups', __( 'All', 'cherry-team' ) );
+
+		if ( ! empty( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$result .= sprintf( $item_format, $term->slug, $term->name );
+			}
+		}
+
+		$this->enqueue_related_scripts();
+
+		return sprintf( '<ul class="cherry-team-filter">%s</ul>', $result );
 
 	}
 

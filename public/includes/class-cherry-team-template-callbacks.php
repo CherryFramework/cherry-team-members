@@ -128,6 +128,10 @@ class Cherry_Team_Members_Template_Callbacks {
 	 */
 	public function get_photo( $args = array() ) {
 
+		if ( isset( $this->atts['show_photo'] ) && false === $this->atts['show_photo'] ) {
+			return;
+		}
+
 		global $post;
 
 		$args = wp_parse_args( $args, array(
@@ -154,7 +158,7 @@ class Cherry_Team_Members_Template_Callbacks {
 		}
 
 		if ( true === $this->atts['show_photo'] || 'yes' === $this->atts['show_photo'] ) {
-			return sprintf( $format, $photo, $link );
+			return $this->macros_wrap( $args, sprintf( $format, $photo, $link ) );
 		}
 
 	}
@@ -166,7 +170,12 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * @return string
 	 */
 	public function get_name( $args = array() ) {
+
 		global $post;
+
+		if ( isset( $this->atts['show_name'] ) && false === $this->atts['show_name'] ) {
+			return;
+		}
 
 		$args = wp_parse_args( $args, array(
 			'wrap'  => 'div',
@@ -174,9 +183,14 @@ class Cherry_Team_Members_Template_Callbacks {
 			'link'  => false
 		) );
 
-		if ( true === $this->atts['show_name'] ) {
-			return $this->post_title();
+		$result       = $this->post_title();
+		$args['link'] = filter_var( $args['link'], FILTER_VALIDATE_BOOLEAN );
+
+		if ( true === $args['link'] ) {
+			$result = '<a href="' . get_permalink() . '">' . $result . '</a>';
 		}
+
+		return $this->macros_wrap( $args, $result );
 	}
 
 	/**
@@ -187,12 +201,16 @@ class Cherry_Team_Members_Template_Callbacks {
 	 */
 	public function get_position( $args = array() ) {
 
+		if ( isset( $this->atts['show_position'] ) && false === $this->atts['show_position'] ) {
+			return;
+		}
+
 		$args = wp_parse_args( $args, array(
 			'wrap'  => 'div',
 			'class' => '',
 		) );
 
-		return $this->get_meta_html( 'position' );
+		return $this->macros_wrap( $args, $this->get_meta_html( 'position' ) );
 	}
 
 	/**
@@ -208,7 +226,7 @@ class Cherry_Team_Members_Template_Callbacks {
 			'class' => '',
 		) );
 
-		return $this->get_meta_html( 'location' );
+		return $this->macros_wrap( $args, $this->get_meta_html( 'location' ) );
 	}
 
 	/**
@@ -241,6 +259,10 @@ class Cherry_Team_Members_Template_Callbacks {
 	 */
 	public function get_excerpt( $args = array() ) {
 
+		if ( isset( $this->atts['show_desc'] ) && false === $this->atts['show_desc'] ) {
+			return;
+		}
+
 		global $post;
 
 		$args = wp_parse_args( $args, array(
@@ -263,9 +285,7 @@ class Cherry_Team_Members_Template_Callbacks {
 
 		}
 
-		$format = '<div class="cherry-team_excerpt">%s</div>';
-
-		return sprintf( $format, $excerpt );
+		return $this->macros_wrap( $args, $excerpt );
 
 	}
 
@@ -295,6 +315,10 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * @return string
 	 */
 	public function get_socials( $args = array() ) {
+
+		if ( isset( $this->atts['show_social'] ) && false === $this->atts['show_social'] ) {
+			return;
+		}
 
 		global $post;
 
@@ -342,7 +366,7 @@ class Cherry_Team_Members_Template_Callbacks {
 
 		}
 
-		return '<div class="team-socials">' . $result . '</div>';
+		return $this->macros_wrap( $args, '<div class="team-socials">' . $result . '</div>' );
 
 	}
 

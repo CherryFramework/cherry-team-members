@@ -37,6 +37,118 @@ class Cherry_Team_Members_Admin_Columns {
 		add_filter( 'manage_edit-team_columns',        array( $this, 'edit_team_columns' ) );
 		add_action( 'manage_team_posts_custom_column', array( $this, 'manage_team_columns' ), 10, 2 );
 
+		add_filter( 'post_row_actions', array( $this, 'duplicate_link' ), 10, 2 );
+		add_action( 'admin_action_cherry_team_clone_post', array( $this, 'duplicate_post_as_draft' ) );
+
+
+	}
+
+	/**
+	 * Add 'Clone' link into posts actions list
+	 *
+	 * @param  array  $actions Available actions.
+	 * @param  object $post    Current post.
+	 * @return [type]          [description]
+	 */
+	public function duplicate_link( $actions, $post ) {
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return $actions;
+		}
+
+		if ( cherry_team_members_init()->name() !== $post->post_type ) {
+			return $actions;
+		}
+
+		$url = add_query_arg(
+			array(
+				'action' => 'cherry_team_clone_post',
+				'post'   => $post->ID,
+			),
+			admin_url( 'admin.php' )
+		);
+
+		$actions['clone'] = sprintf(
+			'<a href="%1$s" title="%3$s" rel="permalink">%2$s</a>',
+			$url,
+			__( 'Clone', 'cherry-team' ),
+			__( 'Clone this post', 'cherry-team' )
+		);
+
+		return $actions;
+	}
+
+	/**
+	 * Process post cloning
+	 */
+	function duplicate_post_as_draft() {
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_die( 'You don\'t have permissions to do this' );
+		}
+
+		if ( empty( $_REQUEST['action'] ) || 'cherry_team_clone_post' !== $_REQUEST['action'] ) {
+			wp_die( 'Not allowed function call!' );
+		}
+
+		if ( empty( $_REQUEST['post'] ) ) {
+			wp_die( 'No post to duplicate has been supplied!' );
+		}
+
+		global $wpdb;
+
+		$post_id         = absint( $_REQUEST['post'] );
+		$post            = get_post( $post_id );
+		$current_user    = wp_get_current_user();
+		$new_post_author = $current_user->ID;
+
+		if ( ! $post ) {
+			wp_die( 'Post creation failed, could not find original post: ' . $post_id );
+		}
+
+		$args = array(
+			'comment_status' => $post->comment_status,
+			'ping_status'    => $post->ping_status,
+			'post_author'    => $new_post_author,
+			'post_content'   => $post->post_content,
+			'post_excerpt'   => $post->post_excerpt,
+			'post_name'      => $post->post_name,
+			'post_parent'    => $post->post_parent,
+			'post_password'  => $post->post_password,
+			'post_status'    => 'draft',
+			'post_title'     => $post->post_title,
+			'post_type'      => $post->post_type,
+			'to_ping'        => $post->to_ping,
+			'menu_order'     => $post->menu_order
+		);
+
+		$new_post_id = wp_insert_post( $args );
+
+		$post_terms = wp_get_object_terms( $post_id, 'group', array( 'fields' => 'slugs' ) );
+		wp_set_object_terms( $new_post_id, $post_terms, 'group', false );
+
+		$post_meta_infos = $wpdb->get_results(
+			"SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = $post_id"
+		);
+
+		if ( 0 !== count( $post_meta_infos ) ) {
+
+			$sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
+
+			foreach ( $post_meta_infos as $meta_info ) {
+
+				$meta_key        = $meta_info->meta_key;
+				$meta_value      = addslashes( $meta_info->meta_value );
+				$sql_query_sel[] = "SELECT $new_post_id, '$meta_key', '$meta_value'";
+
+			}
+
+			$sql_query.= implode( " UNION ALL ", $sql_query_sel );
+			$wpdb->query( $sql_query );
+		}
+
+		wp_redirect( admin_url( 'post.php?action=edit&post=' . $new_post_id ) );
+		exit;
 	}
 
 	/**
@@ -89,8 +201,6 @@ class Cherry_Team_Members_Admin_Columns {
 		$post_columns['position']  = __( 'Position', 'cherry-team' );
 		$post_columns['group']     = __( 'Group', 'cherry-team' );
 		$post_columns['date']      = __( 'Added', 'cherry-team' );
-
-		var_dump( $post_columns );
 
 		// Return the columns.
 		return $post_columns;

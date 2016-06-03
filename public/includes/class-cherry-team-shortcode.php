@@ -234,14 +234,17 @@ class Cherry_Team_Members_Shortcode {
 			'group'          => '',
 			'id'             => 0,
 			'excerpt_length' => 20,
-			'more'           => '',
-			'more_text'      => '',
-			'more_url'       => '',
+			'more'           => true,
+			'more_text'      => __( 'More', 'cherry-team' ),
+			'more_url'       => '#',
+			'ajax_more'      => true,
+			'pagination'     => false,
 			'show_name'      => true,
 			'show_photo'     => true,
 			'show_desc'      => true,
 			'show_position'  => true,
 			'show_social'    => true,
+			'show_filters'   => false,
 			'size'           => 'thumbnail',
 			'layout'         => 'default',
 		);
@@ -272,9 +275,25 @@ class Cherry_Team_Members_Shortcode {
 		$templates      = cherry_team_members_templater()->get_templates_list();
 		$atts['layout'] = isset( $templates['layout'] ) ? $templates['layout'] : 'default.tmpl';
 
+		$bool_to_fix = array(
+			'show_name',
+			'show_photo',
+			'show_desc',
+			'show_position',
+			'show_social',
+			'show_filters',
+			'ajax_more',
+			'more',
+			'pagination',
+		);
+
 		// Fix booleans.
-		foreach ( array( 'show_name', 'show_photo', 'show_desc', 'show_position', 'show_social' ) as $v ) {
+		foreach ( $bool_to_fix as $v ) {
 			$atts[ $v ] = filter_var( $atts[ $v ], FILTER_VALIDATE_BOOLEAN );
+		}
+
+		if ( true === $atts['more'] ) {
+			$atts['pagination'] = false;
 		}
 
 		$relations = array(
@@ -291,7 +310,12 @@ class Cherry_Team_Members_Shortcode {
 			'show_desc'      => 'show_desc',
 			'show_position'  => 'show_position',
 			'show_social'    => 'show_social',
+			'show_filters'   => 'show_filters',
 			'template'       => 'layout',
+			'pager'          => 'pagination',
+			'more'           => 'more',
+			'more_text'      => 'more_text',
+			'more_url'       => 'more_url',
 		);
 
 		foreach ( $relations as $data_key => $atts_key ) {
@@ -306,8 +330,6 @@ class Cherry_Team_Members_Shortcode {
 		// Make sure we return and don't echo.
 		$data_args['echo'] = false;
 
-		$before = '<div class="team-container">';
-
 		$heading = apply_filters(
 			'cherry_team_shortcode_heading_format',
 			array(
@@ -316,6 +338,8 @@ class Cherry_Team_Members_Shortcode {
 				'subtitle'    => '<h6 class="team-heading_subtitle">%s</h6>',
 			)
 		);
+
+		$before  = '<div class="team-container">';
 
 		foreach ( $heading as $item => $format ) {
 

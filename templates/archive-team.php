@@ -23,8 +23,9 @@ get_header( 'team' );
 		do_action( 'cherry_team_before_main_content' );
 	?>
 	<?php if ( apply_filters( 'cherry_team_show_page_title', true ) ) : ?>
-		<h1 class="page-title"><?php the_title(); ?></h1>
+		<?php cherry_team_members_tools()->page_title( '<h1 class="page-title">%s</h1>' ); ?>
 	<?php endif; ?>
+	<div class="team-container">
 	<?php
 
 		global $wp_query;
@@ -42,6 +43,7 @@ get_header( 'team' );
 			'col_lg'     => false,
 			'size'       => 'thumbnail',
 			'pager'      => true,
+			'more'       => false,
 			'limit'      => cherry_team_members()->get_option( 'posts-per-page', 10 ),
 			'group'      => ! empty( $wp_query->query_vars['term'] ) ? $wp_query->query_vars['term'] : '',
 		);
@@ -49,6 +51,7 @@ get_header( 'team' );
 		$data = new Cherry_Team_Members_Data;
 		$data->the_team( $args );
 	?>
+	</div>
 	<?php
 		/**
 		 * Fires after main content output

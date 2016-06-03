@@ -144,6 +144,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 */
 		public function _admin() {
 
+			require_once( $this->plugin_path( 'admin/includes/class-cherry-team-ajax.php' ) );
 			require_once( $this->plugin_path( 'admin/includes/class-cherry-team-admin.php' ) );
 			require_once( $this->plugin_path( 'admin/includes/class-cherry-team-admin-columns.php' ) );
 			require_once( $this->plugin_path( 'admin/includes/class-cherry-team-meta-boxes.php' ) );
@@ -196,6 +197,26 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 
 				wp_enqueue_style( $handle, $data['src'], $data['deps'], $data['ver'], $data['media'] );
 			}
+
+			wp_register_script(
+				'cherry-team',
+				$this->plugin_url( 'public/assets/js/cherry-team.js' ),
+				array( 'cherry-js-core' ),
+				'1.0.0',
+				true
+			);
+
+			wp_localize_script(
+				'cherry-team',
+				'cherryTeam',
+				array(
+					'ajaxurl' => admin_url( 'admin-ajax.php' ),
+					'loader'  => apply_filters(
+						'cherry_team_loader_html',
+						'<div class="cherry-spinner cherry-spinner-double-bounce"><div class="cherry-double-bounce1"></div><div class="cherry-double-bounce2"></div></div>'
+					)
+				)
+			);
 		}
 
 		/**
