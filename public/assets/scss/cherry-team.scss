@@ -7,6 +7,7 @@
 	padding: 0 20px 20px 0;
 }
 .team-single-item {
+	padding: 25px 0;
 	.team-meta {
 		float: left;
 		padding: 0 0 20px 0;
@@ -40,7 +41,7 @@
 					content: "\f003";
 				}
 			}
-			&.telephone {
+			&.phone {
 				&:before {
 					content: "\f095";
 				}
@@ -115,12 +116,77 @@
 	}
 }
 
+.template-grid-boxes .team-listing {
+		&_wrap {
+			position: relative;
+			overflow: hidden;
+		}
+		&_content {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			padding: 20px;
+			background: rgba( 0, 0, 0, .6 );
+			opacity: 0;
+			transition: opacity 300ms linear;
+			&:hover {
+				opacity: 1;
+			}
+		}
+		&_photo {
+			padding: 0;
+			img {
+				border-radius: 0;
+				width: 100%;
+				height: auto;
+			}
+		}
+		&_name {
+			margin: 0 0 10px;
+			transition: background 300ms linear;
+			a {
+				color: #fff;
+				box-shadow: none;
+			}
+		}
+		&_position {
+			color: #fff;
+		}
+		&_desc {
+			color: #fff;
+		}
+		.team-socials_link {
+			color: #fff;
+			box-shadow: none;
+		}
+
+	}
+
 .team-wrap {
 	&:after {
 		clear: both;
 		content: "";
 		width: 100%;
 		display: block;
+	}
+}
+
+.team-collapse-cols {
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.team-item {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.team-collapse-rows {
+	.team-item {
+		padding-bottom: 0;
 	}
 }
 
@@ -136,11 +202,12 @@ $icon-size: 40px;
 	&_link {
 		display: block;
 		font-style: normal;
-		text-decoration: none !important;
 		width: $icon-size;
 		height: $icon-size;
 		position: relative;
 		text-align: center;
+		text-decoration: none;
+		box-shadow: none;
 	}
 	&_icon.fa {
 		display: block;
@@ -172,6 +239,9 @@ $icon-size: 40px;
 		-webkit-transition: all 200ms linear;
 		-moz-transition: all 200ms linear;
 		transition: all 200ms linear;
+		&.empty-label {
+			display: none;
+		}
 		&:before {
 			position: absolute;
 			width: 0;
@@ -192,6 +262,7 @@ $icon-size: 40px;
 	}
 }
 
+// Skills
 .team-skills {
 	&_bar {
 		height: 10px;
@@ -206,6 +277,13 @@ $icon-size: 40px;
 	}
 }
 
+// Fix 5 columns layout
+.columns_5.col-md-2 {
+	flex: 0 0 20%;
+	max-width: 20%;
+}
+
+// Filters and loaders
 .cherry-team {
 	position: relative;
 	.team-listing {

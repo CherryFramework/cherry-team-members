@@ -56,21 +56,22 @@ class Cherry_Team_Members_Tools {
 	public function get_cols() {
 
 		$mobile = array(
-			12 => 12,
-			6  => 6,
-			4  => 6,
-			3  => 6,
+			1 => array( 1, 1 ),
+			2 => array( 2, 1 ),
+			3 => array( 2, 1 ),
+			4 => array( 2, 1 ),
+			5 => array( 2, 1 ),
+			6 => array( 3, 1 ),
 		);
 
 		$cols = cherry_team_members()->get_option( 'archive-columns', 3 );
 		$cols = intval( $cols );
 		$cols = ! ( 0 >= $cols || 4 < $cols ) ? $cols : 3;
-		$cols = 12 / $cols;
 
 		return array(
 			'md' => $cols,
-			'sm' => $mobile[ $cols ],
-			'xs' => 12,
+			'sm' => $mobile[ $cols ][0],
+			'xs' => $mobile[ $cols ][1],
 		);
 
 	}

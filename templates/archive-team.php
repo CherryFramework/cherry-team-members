@@ -34,14 +34,14 @@ get_header( 'team' );
 
 		$args = array(
 			'template'   => cherry_team_members_tools()->get_template( 'listing' ),
-			'wrap_class' => 'team-wrap container',
-			'container'  => '<div class="team-listing row">%s</div>',
+			'wrap_class' => 'team-wrap cherry-team-container',
+			'container'  => '<div class="team-listing cherry-team-row">%s</div>',
 			'item_class' => 'team-listing_item',
 			'col_xs'     => $cols['xs'],
 			'col_sm'     => $cols['sm'],
 			'col_md'     => $cols['md'],
 			'col_lg'     => false,
-			'size'       => 'thumbnail',
+			'size'       => cherry_team_members()->get_option( 'listing-image-size', 'thumbnail' ),
 			'pager'      => true,
 			'more'       => false,
 			'limit'      => cherry_team_members()->get_option( 'posts-per-page', 10 ),

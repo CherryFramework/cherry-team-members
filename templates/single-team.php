@@ -41,7 +41,7 @@ get_header( 'team' );
 					'id'           => get_the_ID(),
 					'template'     => cherry_team_members_tools()->get_template( 'single' ),
 					'custom_class' => 'team-page-single',
-					'size'         => 'large',
+					'size'         => cherry_team_members()->get_option( 'single-image-size', 'thumbnail' ),
 					'container'    => false,
 					'item_class'   => 'team-single-item',
 					'pager'        => false,

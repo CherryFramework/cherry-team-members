@@ -64,7 +64,9 @@ class Cherry_Team_Members_Options_Page {
 		'posts-per-page'     => 9,
 		'archive-columns'    => 3,
 		'single-template'    => 'single',
+		'single-image-size'  => 'thumbnail',
 		'listing-template'   => 'default',
+		'listing-image-size' => 'thumbnail',
 	);
 
 	/**
@@ -133,6 +135,15 @@ class Cherry_Team_Members_Options_Page {
 				'options'          => false,
 				'options_callback' => array( cherry_team_members_tools(), 'get_templates' ),
 			),
+			'single-image-size' => array(
+				'type'             => 'select',
+				'title'            => esc_html__( 'Select image size for single team member page', 'cherry-team' ),
+				'label'            => '',
+				'description'      => '',
+				'value'            => self::$default_options['single-image-size'],
+				'options'          => false,
+				'options_callback' => array( cherry_team_members_tools(), 'get_image_sizes' ),
+			),
 			'listing-template' => array(
 				'type'             => 'select',
 				'title'            => esc_html__( 'Select template for team listing page', 'cherry-team' ),
@@ -141,6 +152,15 @@ class Cherry_Team_Members_Options_Page {
 				'value'            => self::$default_options['listing-template'],
 				'options'          => false,
 				'options_callback' => array( cherry_team_members_tools(), 'get_templates' ),
+			),
+			'listing-image-size' => array(
+				'type'             => 'select',
+				'title'            => esc_html__( 'Select image size for listing team member page', 'cherry-team' ),
+				'label'            => '',
+				'description'      => '',
+				'value'            => self::$default_options['listing-image-size'],
+				'options'          => false,
+				'options_callback' => array( cherry_team_members_tools(), 'get_image_sizes' ),
 			),
 		);
 

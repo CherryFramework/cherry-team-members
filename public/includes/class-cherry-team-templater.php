@@ -280,8 +280,9 @@ class Cherry_Team_Members_Templater {
 	 */
 	public function get_templates_list() {
 		return apply_filters( 'cherry_team_templates_list', array(
-			'default' => 'default.tmpl',
-			'single'  => 'single.tmpl',
+			'default'    => 'default.tmpl',
+			'single'     => 'single.tmpl',
+			'grid-boxes' => 'grid-boxes.tmpl',
 		) );
 	}
 

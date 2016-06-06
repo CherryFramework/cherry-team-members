@@ -123,7 +123,7 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * Get post thumbnail
 	 *
 	 * @since  1.0.0
-	 * @param  string $atts is linked image or not.
+	 * @param  array $args Arguments array.
 	 * @return string
 	 */
 	public function get_photo( $args = array() ) {
@@ -137,8 +137,8 @@ class Cherry_Team_Members_Template_Callbacks {
 		$args = wp_parse_args( $args, array(
 			'wrap'  => 'div',
 			'class' => '',
-			'size'  => 'thumbnail',
-			'link'  => true
+			'size'  => ! empty( $this->atts['size'] ) ? esc_attr( $this->atts['size'] ) : 'thumbnail',
+			'link'  => true,
 		) );
 
 		$photo = $this->post_image();
@@ -167,6 +167,7 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * Get team memeber name (post title)
 	 *
 	 * @since  1.0.0
+	 * @param  array $args Arguments array.
 	 * @return string
 	 */
 	public function get_name( $args = array() ) {
@@ -197,6 +198,7 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * Get team member position
 	 *
 	 * @since 1.0.0
+	 * @param  array $args Arguments array.
 	 * @return string
 	 */
 	public function get_position( $args = array() ) {
@@ -217,6 +219,7 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * Get team member location
 	 *
 	 * @since  1.0.0
+	 * @param  array $args Arguments array.
 	 * @return string
 	 */
 	public function get_location( $args = array() ) {
@@ -233,10 +236,17 @@ class Cherry_Team_Members_Template_Callbacks {
 	 * Get team member phone number
 	 *
 	 * @since  1.0.0
+	 * @param  array $args Arguments array.
 	 * @return string
 	 */
-	public function get_phone() {
-		return $this->get_meta_html( 'telephone' );
+	public function get_phone( $args = array() ) {
+
+		$args = wp_parse_args( $args, array(
+			'wrap'  => 'div',
+			'class' => '',
+		) );
+
+		return $this->macros_wrap( $args, $this->get_meta_html( 'phone' ) );
 	}
 
 	/**
@@ -342,7 +352,7 @@ class Cherry_Team_Members_Template_Callbacks {
 		// Global item format
 		$format = apply_filters(
 			'cherry_team_socials_item_format',
-			'<div class="team-socials_item"><a href="%3$s" class="team-socials_link" rel="nofollow">%1$s<span class="team-socials_label">%2$s</span></a></div>'
+			'<div class="team-socials_item"><a href="%3$s" class="team-socials_link" rel="nofollow">%1$s<span class="team-socials_label%4$s">%2$s</span></a></div>'
 		);
 
 		// Icon format
@@ -362,7 +372,17 @@ class Cherry_Team_Members_Template_Callbacks {
 
 			$label = sprintf( $label, $this->post_title() );
 
-			$result .= sprintf( $format, $icon, $label, $url );
+			$label_class = '';
+
+			if ( ! $label ) {
+				$label_class = ' empty-label';
+			}
+
+			if ( ! $url ) {
+				continue;
+			}
+
+			$result .= sprintf( $format, $icon, $label, $url, $label_class );
 
 		}
 
@@ -406,6 +426,10 @@ class Cherry_Team_Members_Template_Callbacks {
 			$color = esc_attr( $skill['color'] );
 			$label = esc_attr( $skill['label'] );
 			$value = intval( $skill['value'] );
+
+			if ( 100 > $value ) {
+				$value = 100;
+			}
 
 			$label = sprintf( $label, $this->post_title() );
 
@@ -463,7 +487,7 @@ class Cherry_Team_Members_Template_Callbacks {
 		}
 
 		$tag   = ! empty( $args['wrap'] ) ? esc_attr( $args['wrap'] ) : 'div';
-		$class = ! empty( $args['class'] ) ? esc_attr( $args['class'] ) : '';
+		$class = ! empty( $args['class'] ) ? esc_attr( $args['class'] ) : 'team-macros';
 
 		return sprintf( '<%1$s class="%2$s">%3$s</%1$s>', $tag, $class, $string );
 

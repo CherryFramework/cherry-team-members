@@ -87,6 +87,8 @@ class Cherry_Team_Members_Data {
 			'show_position'  => true,
 			'show_social'    => true,
 			'show_filters'   => false,
+			'use_space'      => true,
+			'use_rows_space' => true,
 			'size'           => 'thumbnail',
 			'echo'           => true,
 			'title'          => '',
@@ -102,7 +104,7 @@ class Cherry_Team_Members_Data {
 			'paged'          => 1,
 			'template'       => 'default.tmpl',
 			'item_class'     => 'team-item',
-			'container'      => '<div class="team-listing row">%s</div>',
+			'container'      => '<div class="team-listing cherry-team-row">%s</div>',
 		) );
 	}
 
@@ -183,6 +185,14 @@ class Cherry_Team_Members_Data {
 
 		if ( ! empty( $args['class'] ) ) {
 			$css_classes[] = esc_attr( $args['class'] );
+		}
+
+		if ( false === $args['use_space'] ) {
+			$css_classes[] = 'team-collapse-cols';
+		}
+
+		if ( false === $args['use_rows_space'] ) {
+			$css_classes[] = 'team-collapse-rows';
 		}
 
 		$css_class = implode( ' ', $css_classes );
@@ -400,17 +410,21 @@ class Cherry_Team_Members_Data {
 			$query = $wp_query;
 		}
 
-		if ( 1 >= $query->max_num_pages ) {
-			return;
-		}
-
-		$this->enqueue_related_scripts();
-
 		$atts = wp_parse_args( $atts, array(
 			'more_text' => __( 'More', 'cherry-team' ),
 			'more_url'  => '#',
 			'ajax_more' => true,
 		) );
+
+		if ( true === $atts['ajax_more'] && 1 >= $query->max_num_pages ) {
+			return;
+		}
+
+		if ( empty( $atts['more_text'] ) ) {
+			return;
+		}
+
+		$this->enqueue_related_scripts();
 
 		$format = '<div class="team-more-btn"><a href="%2$s" class="btn btn-primary %3$s">%1$s</a></div>';
 
@@ -577,8 +591,8 @@ class Cherry_Team_Members_Data {
 					$cols = 1;
 				}
 
-				$item_classes[] = str_replace( '_', '-', $col ) . '-' . absint( $args[ $col ] );
-				$item_classes[] = ( ( $count - 1 ) % floor( 12 / $cols ) ) ? '' : 'clear-' . str_replace( '_', '-', $col );
+				$item_classes[] = $col . '_' . absint( $args[ $col ] );
+
 			}
 
 			$count++;

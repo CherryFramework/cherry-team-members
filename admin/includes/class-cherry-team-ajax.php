@@ -69,8 +69,12 @@ if ( ! class_exists( 'Cherry_Team_Members_Ajax' ) ) {
 				'show_desc',
 				'show_position',
 				'show_social',
-				'echo',
+				'show_filters',
+				'ajax_more',
+				'more',
 				'pager',
+				'use_space',
+				'use_rows_space',
 			);
 
 			foreach ( $atts as $key => $value ) {
@@ -125,12 +129,17 @@ if ( ! class_exists( 'Cherry_Team_Members_Ajax' ) ) {
 
 			$query  = $this->data->get_team( $atts );
 			$result = $this->data->get_team_loop( $query, $atts );
+			$pager  = '';
+
+			if ( false === $atts['more'] && true === $atts['pager'] ) {
+				$pager = $this->data->get_pagination( $query );
+			}
 
 			wp_send_json_success( array(
 				'result' => $result,
 				'atts'   => $atts,
 				'pages'  => $query->max_num_pages,
-				'pager'  => $this->data->get_pagination( $query ),
+				'pager'  => $pager,
 			) );
 
 		}

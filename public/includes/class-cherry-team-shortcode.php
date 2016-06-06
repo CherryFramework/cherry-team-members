@@ -245,8 +245,10 @@ class Cherry_Team_Members_Shortcode {
 			'show_position'  => true,
 			'show_social'    => true,
 			'show_filters'   => false,
-			'size'           => 'thumbnail',
-			'layout'         => 'default',
+			'image_size'     => 'thumbnail',
+			'template'       => 'default',
+			'use_space'      => true,
+			'use_rows_space' => true,
 		);
 
 		/**
@@ -261,19 +263,21 @@ class Cherry_Team_Members_Shortcode {
 			$atts['posts_per_page'] = intval( $atts['posts_per_page'] );
 		}
 
-		if ( isset( $atts['size'] ) &&  ( 0 < intval( $atts['size'] ) ) ) {
-			$atts['size'] = intval( $atts['size'] );
+		if ( isset( $atts['image_size'] ) &&  ( 0 < intval( $atts['image_size'] ) ) ) {
+			$atts['image_size'] = intval( $atts['image_size'] );
 		} else {
-			$atts['size'] = esc_attr( $atts['size'] );
+			$atts['image_size'] = esc_attr( $atts['image_size'] );
 		}
+
+		$col_classes = '';
 
 		// Fix columns
 		foreach ( array( 'columns', 'columns_tablet', 'columns_phone' ) as $col ) {
-			$atts[ $col ] = ( 0 !== intval( $atts[ $col ] ) ) ? round( 12 / $atts[ $col ] ) : 3;
+			$atts[ $col ] = ( 0 !== intval( $atts[ $col ] ) ) ? intval( $atts[ $col ] ) : 3;
 		}
 
-		$templates      = cherry_team_members_templater()->get_templates_list();
-		$atts['layout'] = isset( $templates['layout'] ) ? $templates['layout'] : 'default.tmpl';
+		$templates        = cherry_team_members_templater()->get_templates_list();
+		$atts['template'] = isset( $templates[ $atts['template'] ] ) ? $templates[ $atts['template'] ] : 'default.tmpl';
 
 		$bool_to_fix = array(
 			'show_name',
@@ -285,6 +289,8 @@ class Cherry_Team_Members_Shortcode {
 			'ajax_more',
 			'more',
 			'pagination',
+			'use_space',
+			'use_rows_space',
 		);
 
 		// Fix booleans.
@@ -300,7 +306,7 @@ class Cherry_Team_Members_Shortcode {
 			'limit'          => 'posts_per_page',
 			'id'             => 'id',
 			'group'          => 'group',
-			'size'           => 'thumbnail',
+			'size'           => 'image_size',
 			'excerpt_length' => 'excerpt_length',
 			'col_xs'         => 'columns_phone',
 			'col_sm'         => 'columns_tablet',
@@ -311,11 +317,14 @@ class Cherry_Team_Members_Shortcode {
 			'show_position'  => 'show_position',
 			'show_social'    => 'show_social',
 			'show_filters'   => 'show_filters',
-			'template'       => 'layout',
+			'template'       => 'template',
 			'pager'          => 'pagination',
 			'more'           => 'more',
 			'more_text'      => 'more_text',
 			'more_url'       => 'more_url',
+			'ajax_more'      => 'ajax_more',
+			'use_space'      => 'use_space',
+			'use_rows_space' => 'use_rows_space',
 		);
 
 		foreach ( $relations as $data_key => $atts_key ) {
@@ -329,6 +338,12 @@ class Cherry_Team_Members_Shortcode {
 
 		// Make sure we return and don't echo.
 		$data_args['echo'] = false;
+
+		if ( ! empty( $data_args['item_class'] ) ) {
+			$data_args['item_class'] .= $col_classes;
+		} else {
+			$data_args['item_class'] = trim( $col_classes );
+		}
 
 		$heading = apply_filters(
 			'cherry_team_shortcode_heading_format',
