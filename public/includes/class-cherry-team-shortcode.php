@@ -345,6 +345,8 @@ class Cherry_Team_Members_Shortcode {
 			$data_args['item_class'] = trim( $col_classes );
 		}
 
+		$data_args['item_class'] .= ' team-item';
+
 		$heading = apply_filters(
 			'cherry_team_shortcode_heading_format',
 			array(

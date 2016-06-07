@@ -427,7 +427,7 @@ class Cherry_Team_Members_Template_Callbacks {
 			$label = esc_attr( $skill['label'] );
 			$value = intval( $skill['value'] );
 
-			if ( 100 > $value ) {
+			if ( 100 < $value ) {
 				$value = 100;
 			}
 
