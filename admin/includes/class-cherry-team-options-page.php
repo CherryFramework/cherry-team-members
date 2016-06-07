@@ -226,9 +226,10 @@ class Cherry_Team_Members_Options_Page {
 	 * @return [type] [description]
 	 */
 	public function render_page() {
-		add_menu_page(
+		add_submenu_page(
+			'edit.php?post_type=' . cherry_team_members_init()->name(),
 			esc_html__( 'Cherry Team Options', 'cherry-team' ),
-			esc_html__( 'Cherry Team', 'cherry-team' ),
+			esc_html__( 'Settings', 'cherry-team' ),
 			'edit_theme_options',
 			$this->page_slug,
 			array( $this, 'options_page' ),
@@ -440,7 +441,7 @@ class Cherry_Team_Members_Options_Page {
 	 */
 	public function enqueue_styles( $hook_suffix ) {
 
-		if ( 'toplevel_page_cherry-team-options' !== $hook_suffix ) {
+		if ( false === strpos( $hook_suffix, $this->page_slug ) ) {
 			return null;
 		}
 
@@ -454,8 +455,8 @@ class Cherry_Team_Members_Options_Page {
 	 */
 	public function enqueue_scripts( $hook_suffix ) {
 
-		if ( 'toplevel_page_cherry-team-options' !== $hook_suffix ) {
-			return;
+		if ( false === strpos( $hook_suffix, $this->page_slug ) ) {
+			return null;
 		}
 
 		wp_enqueue_script( 'serialize-object' );
