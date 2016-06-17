@@ -102,6 +102,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 			add_action( 'after_setup_theme', require( $this->plugin_path( 'cherry-framework/setup.php' ) ), 0 );
 			// Load the core functions/classes required by the rest of the theme.
 			add_action( 'after_setup_theme', array( $this, 'get_core' ), 1 );
+			add_action( 'after_setup_theme', array( 'Cherry_Core', 'load_all_modules' ), 2 );
 
 			// Register activation and deactivation hook.
 			register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
@@ -248,6 +249,8 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 			}
 
 			$this->core = new Cherry_Core( array(
+				'base_dir' => $this->plugin_path( 'cherry-framework' ),
+				'base_url' => $this->plugin_url( 'cherry-framework' ),
 				'modules'  => array(
 					'cherry-js-core' => array(
 						'autoload' => true,
