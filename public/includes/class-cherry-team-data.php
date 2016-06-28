@@ -716,9 +716,9 @@ class Cherry_Team_Members_Data {
 			$groups = explode( ',', $atts['group'] );
 		}
 
-		$item_format = '<li class="cherry-team-filter_item"><a href="#!%1$s" class="cherry-team-filter_link" data-term="%1$s">%2$s</a></li>';
+		$item_format = '<li class="cherry-team-filter_item%3$s"><a href="#!%1$s" class="cherry-team-filter_link" data-term="%1$s">%2$s</a></li>';
 		$terms       = get_terms( 'group' );
-		$result      = sprintf( $item_format, 'all-groups', __( 'All', 'cherry-team' ) );
+		$result      = sprintf( $item_format, 'all-groups', __( 'All', 'cherry-team' ), ' active' );
 
 		if ( ! empty( $terms ) ) {
 			foreach ( $terms as $term ) {
@@ -727,7 +727,7 @@ class Cherry_Team_Members_Data {
 					continue;
 				}
 
-				$result .= sprintf( $item_format, $term->slug, $term->name );
+				$result .= sprintf( $item_format, $term->slug, $term->name, false );
 			}
 		}
 

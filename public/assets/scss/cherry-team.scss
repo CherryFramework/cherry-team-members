@@ -284,6 +284,8 @@ $icon-size: 40px;
 	max-width: 20%;
 }
 
+
+
 // Filters and loaders
 .cherry-team {
 	position: relative;
@@ -304,6 +306,34 @@ $icon-size: 40px;
 	&_item {
 		display: inline-block;
 		margin: 0 20px 0 0;
+		&.active {
+			.cherry-team-filter_link {
+				border-color: currentColor;
+			}
+		}
+	}
+	&_link {
+		padding: 8px 15px;
+		border: 1px solid transparent;
+		border-radius: 3px;
+		&:hover {
+			border-color: currentColor;
+		}
+	}
+}
+
+a.page-numbers {
+	border: 1px solid #e0e0e8;
+	display: inline-block;
+	height: 3em;
+	line-height: 3;
+	margin: 0 5px 5px 0;
+	min-width: 3em;
+	text-align: center;
+	text-decoration: none;
+	&.current,
+	&:hover {
+		border-color: currentColor;
 	}
 }
 
@@ -353,10 +383,14 @@ $icon-size: 40px;
 	top: 0;
 	left: 0;
 	animation: cherry-doubleBounce 2s infinite ease-in-out;
+	text-decoration: none;
+	border: none;
 }
 
 .cherry-spinner-double-bounce .cherry-double-bounce2 {
 	animation-delay: -1s;
+	text-decoration: none;
+	border: none;
 }
 
 @-webkit-keyframes cherry-doubleBounce {
