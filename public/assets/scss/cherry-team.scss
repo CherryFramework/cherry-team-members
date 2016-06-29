@@ -316,6 +316,7 @@ $icon-size: 40px;
 		padding: 8px 15px;
 		border: 1px solid transparent;
 		border-radius: 3px;
+		display: inline-block;
 		&:hover {
 			border-color: currentColor;
 		}
