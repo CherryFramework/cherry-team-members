@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: blank\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-05 11:45+0200\n"
-"PO-Revision-Date: 2016-08-05 11:45+0200\n"
+"POT-Creation-Date: 2016-08-05 11:59+0200\n"
+"PO-Revision-Date: 2016-08-05 11:59+0200\n"
 "Last-Translator: Vladimir Anokhin <ano.vladimir@gmail.com>\n"
 "Language-Team: Cherry Team <support@cherryframework.com>\n"
 "Language: su\n"
@@ -253,7 +253,7 @@ msgid "Person photo size"
 msgstr ""
 
 #: admin/views/options-page.php:70
-msgid "Template name to use"
+msgid "Template name to use (default or grid-boxes)"
 msgstr ""
 
 #: admin/views/options-page.php:71

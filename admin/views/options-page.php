@@ -67,7 +67,7 @@
 				<li><strong>show_social</strong> - <?php _e( 'Show person social profiles links', 'cherry-team' ); ?></li>
 				<li><strong>show_filters</strong> - <?php _e( 'Show filters by groups before listing', 'cherry-team' ); ?></li>
 				<li><strong>image_size</strong> - <?php _e( 'Person photo size', 'cherry-team' ); ?></li>
-				<li><strong>template</strong> - <?php _e( 'Template name to use', 'cherry-team' ); ?></li>
+				<li><strong>template</strong> - <?php _e( 'Template name to use (default or grid-boxes)', 'cherry-team' ); ?></li>
 				<li><strong>use_space</strong> - <?php _e( 'Use space between columns', 'cherry-team' ); ?></li>
 				<li><strong>template</strong> - <?php _e( 'Use space between rows', 'cherry-team' ); ?></li>
 			</ul>
