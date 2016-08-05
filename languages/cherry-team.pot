@@ -1,0 +1,509 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: blank\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-05 11:45+0200\n"
+"PO-Revision-Date: 2016-08-05 11:45+0200\n"
+"Last-Translator: Vladimir Anokhin <ano.vladimir@gmail.com>\n"
+"Language-Team: Cherry Team <support@cherryframework.com>\n"
+"Language: su\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__;__;_x;esc_html_e;esc_html__;esc_attr_e;"
+"esc_attr__;_x:1,2c;_n:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.7.6\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/includes/class-cherry-team-admin-columns.php:74
+msgid "Clone"
+msgstr ""
+
+#: admin/includes/class-cherry-team-admin-columns.php:75
+msgid "Clone this post"
+msgstr ""
+
+#: admin/includes/class-cherry-team-admin-columns.php:200
+msgid "Photo"
+msgstr ""
+
+#: admin/includes/class-cherry-team-admin-columns.php:201
+#: admin/includes/class-cherry-team-meta-boxes.php:59
+#: admin/includes/class-cherry-team-meta-boxes.php:60
+msgid "Position"
+msgstr ""
+
+#: admin/includes/class-cherry-team-admin-columns.php:202
+msgid "Group"
+msgstr ""
+
+#: admin/includes/class-cherry-team-admin-columns.php:203
+msgid "Added"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:51
+msgid "Person Options"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:64
+#: admin/includes/class-cherry-team-meta-boxes.php:65
+msgid "Location"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:69
+#: admin/includes/class-cherry-team-meta-boxes.php:70
+msgid "Phone Number"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:74
+msgid "Social profiles"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:75
+msgid "Add Social Network"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:82
+msgid "Choose icon"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:95
+#: admin/includes/class-cherry-team-meta-boxes.php:96
+msgid "Label"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:102
+#: admin/includes/class-cherry-team-meta-boxes.php:103
+msgid "URL"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:109
+msgid "Skills"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:110
+msgid "Add New Skill"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:118
+#: admin/includes/class-cherry-team-meta-boxes.php:119
+msgid "Skill bar color"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:125
+#: admin/includes/class-cherry-team-meta-boxes.php:126
+msgid "Skill Label"
+msgstr ""
+
+#: admin/includes/class-cherry-team-meta-boxes.php:136
+#: admin/includes/class-cherry-team-meta-boxes.php:137
+msgid "Skill Value"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:106
+msgid "Select team archive page"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:115
+msgid "Set posts number per archive page"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:123
+msgid "Select archive page columns number"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:131
+msgid "Select template for single team member page"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:140
+msgid "Select image size for single team member page"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:149
+msgid "Select template for team listing page"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:158
+msgid "Select image size for listing team member page"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:231
+msgid "Cherry Team Options"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:232
+msgid "Settings"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:272
+msgid "Save"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:273
+msgid "Define as default"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:274
+msgid "Restore"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:388
+msgid "Options have been saved"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:396
+msgid "Options have been saved as default"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:406
+msgid "Options have been restored"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:467
+msgid "Please wait, processing the previous request"
+msgstr ""
+
+#: admin/views/options-page.php:49
+msgid "Text before main title"
+msgstr ""
+
+#: admin/views/options-page.php:50
+msgid "Main title"
+msgstr ""
+
+#: admin/views/options-page.php:51
+msgid "Text after main title"
+msgstr ""
+
+#: admin/views/options-page.php:52
+msgid "Columns number"
+msgstr ""
+
+#: admin/views/options-page.php:53
+msgid "Tablets columns number"
+msgstr ""
+
+#: admin/views/options-page.php:54
+msgid "Phones columns number"
+msgstr ""
+
+#: admin/views/options-page.php:55
+msgid "Posts number to show"
+msgstr ""
+
+#: admin/views/options-page.php:56
+msgid ""
+"Select posts from group (use goup slug, pass multiplie groups via comma)"
+msgstr ""
+
+#: admin/views/options-page.php:57
+msgid "Words number in excerpt"
+msgstr ""
+
+#: admin/views/options-page.php:58
+msgid "Show more button"
+msgstr ""
+
+#: admin/views/options-page.php:59
+msgid "More button text"
+msgstr ""
+
+#: admin/views/options-page.php:60
+msgid "More button URL"
+msgstr ""
+
+#: admin/views/options-page.php:61
+msgid "Use more as AJAX load more button"
+msgstr ""
+
+#: admin/views/options-page.php:62
+msgid "Show pagination"
+msgstr ""
+
+#: admin/views/options-page.php:63
+msgid "Show person name"
+msgstr ""
+
+#: admin/views/options-page.php:64
+msgid "Show person photo"
+msgstr ""
+
+#: admin/views/options-page.php:65
+msgid "Show person description"
+msgstr ""
+
+#: admin/views/options-page.php:66
+msgid "Show person position"
+msgstr ""
+
+#: admin/views/options-page.php:67
+msgid "Show person social profiles links"
+msgstr ""
+
+#: admin/views/options-page.php:68
+msgid "Show filters by groups before listing"
+msgstr ""
+
+#: admin/views/options-page.php:69
+msgid "Person photo size"
+msgstr ""
+
+#: admin/views/options-page.php:70
+msgid "Template name to use"
+msgstr ""
+
+#: admin/views/options-page.php:71
+msgid "Use space between columns"
+msgstr ""
+
+#: admin/views/options-page.php:72
+msgid "Use space between rows"
+msgstr ""
+
+#: public/includes/class-cherry-team-data.php:81
+#: public/includes/class-cherry-team-data.php:414
+#: public/includes/class-cherry-team-shortcode.php:238
+msgid "More"
+msgstr ""
+
+#: public/includes/class-cherry-team-data.php:721
+msgid "All"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:56
+#: public/includes/class-cherry-team-init.php:57
+#: public/includes/class-cherry-team-shortcode.php:98
+msgid "Team"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:58
+msgid "Add New"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:59
+msgid "Add New Person"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:60
+msgid "Edit Person"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:61
+msgid "New Person"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:62
+msgid "View Person"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:63
+msgid "Search Persons"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:64
+msgid "No persons found"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:65
+msgid "No persons found in trash"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:112
+msgid "Team Groups"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:113
+#: public/includes/class-cherry-team-init.php:119
+msgid "Edit Group"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:114
+msgid "Search Groups"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:115
+msgid "Popular Groups"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:116
+msgid "All Groups"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:120
+msgid "Update Group"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:121
+msgid "Add New Group"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:122
+msgid "New Group Name"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:123
+msgid "Separate groups with commas"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:124
+msgid "Add or remove groups"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:125
+msgid "Choose from the most used groups"
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:126
+msgid "No groups found."
+msgstr ""
+
+#: public/includes/class-cherry-team-init.php:127
+#: public/includes/class-cherry-team-shortcode.php:145
+msgid "Groups"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:99
+msgid "Cherry team shortcode"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:109
+msgid "Limit"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:110
+msgid "Maximum number of posts."
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:115
+msgid "Descending"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:116
+msgid "Ascending"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:119
+msgid "Order"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:120
+msgid "Posts order"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:125
+msgid "None"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:126
+msgid "Post ID"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:127
+msgid "Post author"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:128
+msgid "Post title"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:129
+msgid "Post slug"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:130
+msgid "Date"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:131
+msgid "Last modified date"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:132
+msgid "Random"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:133
+msgid "Comments number"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:134
+msgid "Menu order"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:137
+msgid "Order by"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:138
+msgid "Order posts by"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:146
+msgid "Select groups to show team members from"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:150
+msgid "Post ID's"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:151
+msgid "Enter comma separated ID's of the posts that you want to show"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:156
+#: public/includes/class-cherry-team-shortcode.php:157
+msgid "Show name?"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:162
+#: public/includes/class-cherry-team-shortcode.php:163
+msgid "Show photo?"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:169
+msgid "Featured image size"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:170
+msgid "Select size for a Featured image"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:178
+msgid "Excerpt Length"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:179
+msgid "Excerpt length (if used in template)"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:189
+msgid "Column class"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:190
+msgid "Column class for each item."
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:198
+msgid "Template"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:199
+msgid "Shortcode template"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:203
+msgid "Class"
+msgstr ""
+
+#: public/includes/class-cherry-team-shortcode.php:204
+msgid "Extra CSS class"
+msgstr ""
+
+#: public/includes/class-cherry-team-tools.php:105
+msgid "Select page..."
+msgstr ""
