@@ -204,7 +204,7 @@ class Cherry_Team_Members_Templater {
 		 * @since 1.0.0
 		 * @param string $content.
 		 */
-		$content = apply_filters( 'cherry_projects_fallback_template', '<div class="inner-wrapper">%%title%%%%image%%%%content%%</div>' );
+		$content = apply_filters( 'cherry_team_members_fallback_template', '<div class="inner-wrapper">%%title%%%%image%%%%content%%</div>' );
 
 		if ( file_exists( $upload_dir . $subdir ) ) {
 			$file = $upload_dir . $subdir;
