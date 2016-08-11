@@ -69,7 +69,7 @@
 				<li><strong>image_size</strong> - <?php _e( 'Person photo size', 'cherry-team' ); ?></li>
 				<li><strong>template</strong> - <?php _e( 'Template name to use (default or grid-boxes)', 'cherry-team' ); ?></li>
 				<li><strong>use_space</strong> - <?php _e( 'Use space between columns', 'cherry-team' ); ?></li>
-				<li><strong>template</strong> - <?php _e( 'Use space between rows', 'cherry-team' ); ?></li>
+				<li><strong>use_rows_space</strong> - <?php _e( 'Use space between rows', 'cherry-team' ); ?></li>
 			</ul>
 		</div>
 	</div>
