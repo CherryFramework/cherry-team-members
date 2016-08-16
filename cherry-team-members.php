@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Cherry Team Members
- * Plugin URI:  http://www.cherryframework.com/
- * Description: A team management plugin for WordPress.
+ * Plugin URI:  http://www.templatemonster.com/wordpress-themes.php
+ * Description: Cherry Team Members plugin allows you to showcase your team and personnel.
  * Version:     1.0.0
- * Author:      Cherry Team
- * Author URI:  http://www.cherryframework.com/
+ * Author:      TemplateMonster
+ * Author URI:  http://www.templatemonster.com/
  * Text Domain: cherry-team
  * License:     GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
