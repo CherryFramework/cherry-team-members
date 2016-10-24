@@ -4,7 +4,7 @@ Contributors: TemplateMonster 2002
 Tags: custom post type, team
 Requires at least: 4.5
 Tested up to: 4.5.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,3 +82,7 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 = 1.0.0 =
 
 * Initial release
+
+= 1.0.1 =
+
+* UPD: framework version
