@@ -1,10 +1,10 @@
 === Cherry Team Members ===
 
 Contributors: TemplateMonster 2002
-Tags: custom post type, team
+Tags: custom post type, team, cherry-framework
 Requires at least: 4.5
 Tested up to: 4.6.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -86,3 +86,7 @@ Standard templates can be rewritten in the theme. For that you need to create ch
 = 1.0.1 =
 
 * UPD: framework version
+
+= 1.0.3 =
+
+* UPD: getting templates method

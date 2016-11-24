@@ -155,31 +155,18 @@ class Cherry_Team_Members_Templater {
 	 * Read template (static).
 	 *
 	 * @since  1.0.0
-	 * @return bool|WP_Error|string - false on failure, stored text on success.
+	 * @since  1.0.3 - Use output buffering for getting template content.
+	 * @return bool|string - false on failure, stored text on success.
 	 */
 	public static function get_contents( $template ) {
 
-		if ( ! function_exists( 'WP_Filesystem' ) ) {
-			include_once( ABSPATH . '/wp-admin/includes/file.php' );
-		}
-
-		WP_Filesystem();
-		global $wp_filesystem;
-
-		// Check for existence.
-		if ( ! $wp_filesystem->exists( $template ) ) {
+		if ( ! file_exists( $template ) ) {
 			return false;
 		}
 
-		// Read the file.
-		$content = $wp_filesystem->get_contents( $template );
-
-		if ( ! $content ) {
-			// Return error object.
-			return new WP_Error( 'reading_error', 'Error when reading file' );
-		}
-
-		return $content;
+		ob_start();
+		include $template;
+		return ob_get_clean();
 	}
 
 	/**
