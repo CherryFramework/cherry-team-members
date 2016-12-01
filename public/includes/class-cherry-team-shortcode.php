@@ -228,6 +228,7 @@ class Cherry_Team_Members_Shortcode {
 			'title'          => '',
 			'subtitle'       => '',
 			'columns'        => 3,
+			'columns_laptop' => 3,
 			'columns_tablet' => 2,
 			'columns_phone'  => 1,
 			'posts_per_page' => 6,
@@ -272,7 +273,7 @@ class Cherry_Team_Members_Shortcode {
 		$col_classes = '';
 
 		// Fix columns
-		foreach ( array( 'columns', 'columns_tablet', 'columns_phone' ) as $col ) {
+		foreach ( array( 'columns', 'columns_laptop', 'columns_tablet', 'columns_phone' ) as $col ) {
 			$atts[ $col ] = ( 0 !== intval( $atts[ $col ] ) ) ? intval( $atts[ $col ] ) : 3;
 		}
 
@@ -310,7 +311,8 @@ class Cherry_Team_Members_Shortcode {
 			'excerpt_length' => 'excerpt_length',
 			'col_xs'         => 'columns_phone',
 			'col_sm'         => 'columns_tablet',
-			'col_md'         => 'columns',
+			'col_md'         => 'columns_laptop',
+			'col_xl'         => 'columns',
 			'show_name'      => 'show_name',
 			'show_photo'     => 'show_photo',
 			'show_desc'      => 'show_desc',
