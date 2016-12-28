@@ -1,10 +1,10 @@
 <wpml-config>
 	<custom-fields>
-		<custom-field action="copy">cherry-team-position</custom-field>
-		<custom-field action="copy">cherry-team-location</custom-field>
-		<custom-field action="copy">cherry-team-phone</custom-field>
-		<custom-field action="copy">cherry-team-social</custom-field>
-		<custom-field action="copy">cherry-team-skills</custom-field>
+		<custom-field action="translate">cherry-team-position</custom-field>
+		<custom-field action="translate">cherry-team-location</custom-field>
+		<custom-field action="translate">cherry-team-phone</custom-field>
+		<custom-field action="translate">cherry-team-social</custom-field>
+		<custom-field action="translate">cherry-team-skills</custom-field>
 	</custom-fields>
 	<custom-types>
 		<custom-type translate="1">team</custom-type>
