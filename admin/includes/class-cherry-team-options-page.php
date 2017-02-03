@@ -279,6 +279,7 @@ class Cherry_Team_Members_Options_Page {
 
 			$value = isset( $current_options[ $key ] ) ? $current_options[ $key ] : false;
 			$value = ( false !== $value ) ? $value : Cherry_Toolkit::get_arg( $field, 'value', '' );
+			$value = ( 'archive-page' == $key ) ? apply_filters( 'wpml_object_id', $value, 'page', true ) : $value;
 
 			if ( isset( $field['options_callback'] ) ) {
 

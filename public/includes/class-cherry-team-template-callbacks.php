@@ -339,7 +339,7 @@ class Cherry_Team_Members_Template_Callbacks {
 
 		$socials = get_post_meta( $post->ID, 'cherry-team-social', true );
 
-		if ( empty( $socials ) ) {
+		if ( empty( $socials ) || ! is_array( $socials ) ) {
 			return;
 		}
 

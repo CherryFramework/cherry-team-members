@@ -62,6 +62,9 @@ class Cherry_Team_Members_Templater {
 		$find = array();
 		$file = '';
 
+		$archive_page = cherry_team_members()->get_option( 'archive-page' );
+		$archive_page = apply_filters( 'wpml_object_id', $archive_page, 'page', true );
+
 		if ( is_single() && cherry_team_members_init()->name() === get_post_type() ) {
 
 			$file   = 'single-team.php';
@@ -86,11 +89,12 @@ class Cherry_Team_Members_Templater {
 
 		} elseif ( is_post_type_archive( cherry_team_members_init()->name() ) ) {
 
-			$file 	= 'archive-team.php';
+			$file   = 'archive-team.php';
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 
-		} elseif ( cherry_team_members()->get_option( 'archive-page' ) && is_page( cherry_team_members()->get_option( 'archive-page' ) ) ) {
+		} elseif ( $archive_page && is_page( $archive_page ) ) {
+
 			$file   = 'archive-team.php';
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
