@@ -48,13 +48,15 @@
 				$teamOptionsForm = event.data.optionsForm,
 				$cherrySpinner = $('.cherry-spinner-wordpress', $teamOptionsForm),
 				ajaxRequestType = event.data.ajaxRequestType,
-				serializeArray = $teamOptionsForm.serializeObject(),
+				serializeArray = $teamOptionsForm.cherryTeamSerializeObject(),
 				data = {
 					nonce: CherryJsCore.variable.security,
 					action: 'cherry_team_members_process_options',
 					post_array: serializeArray,
 					type: ajaxRequestType
 				};
+
+			console.log( serializeArray );
 
 			if ( ! self.ajaxRequestSuccess ) {
 				self.ajaxRequest.abort();

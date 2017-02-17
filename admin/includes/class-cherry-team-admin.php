@@ -48,7 +48,7 @@ class Cherry_Team_Members_Admin {
 		);
 
 		wp_register_script(
-			'serialize-object',
+			'cherry-serialize-object',
 			cherry_team_members()->plugin_url( 'admin/assets/js/serialize-object.js' ),
 			array( 'jquery' ),
 			cherry_team_members()->version(),

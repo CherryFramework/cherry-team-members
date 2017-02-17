@@ -42,6 +42,8 @@ class Cherry_Team_Members_Init {
 		add_action( 'init', array( __CLASS__, 'register_post' ) );
 		add_action( 'init', array( __CLASS__, 'register_tax' ) );
 
+		// Adds Cherry Search compatibility
+		add_filter( 'cherry_search_support_categories', array( $this, 'search_tax' ) );
 	}
 
 	/**
@@ -139,6 +141,18 @@ class Cherry_Team_Members_Init {
 
 		register_taxonomy( 'group', self::$name, $args );
 
+	}
+
+	/**
+	 * Pass services taxonomy into search plugin
+	 *
+	 * @param  array $taxonomies Supported taxonomies.
+	 * @return array
+	 */
+	public function search_tax( $taxonomies ) {
+
+		$taxonomies[] = 'group';
+		return $taxonomies;
 	}
 
 	/**

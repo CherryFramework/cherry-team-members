@@ -460,8 +460,7 @@ class Cherry_Team_Members_Options_Page {
 			return null;
 		}
 
-		wp_enqueue_script( 'serialize-object' );
-
+		wp_enqueue_script( 'cherry-serialize-object' );
 		wp_enqueue_script( 'cherry-team-admin-scripts' );
 
 		$options_page_settings = array(

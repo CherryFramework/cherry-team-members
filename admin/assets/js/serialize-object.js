@@ -1,7 +1,7 @@
 ( function( $ ) {
 	"use strict";
 
-	$.fn.serializeObject = function() {
+	$.fn.cherryTeamSerializeObject = function() {
 
 		var self = this,
 			json = {},
