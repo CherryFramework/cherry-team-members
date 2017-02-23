@@ -59,6 +59,20 @@ class Cherry_Team_Members_Shortcode {
 	 */
 	public function register_shortcode() {
 
+		add_shortcode( $this->tag(), array( $this, 'do_shortcode' ) );
+
+		if ( is_admin() ) {
+			$this->register_shortcode_for_builder();
+		}
+	}
+
+	/**
+	 * Returns shortcode tag.
+	 *
+	 * @return string
+	 */
+	public function tag() {
+
 		/**
 		 * Filters a shortcode name.
 		 *
@@ -67,148 +81,252 @@ class Cherry_Team_Members_Shortcode {
 		 */
 		$tag = apply_filters( self::$name . '_shortcode_name', self::$name );
 
-		add_shortcode( $tag, array( $this, 'do_shortcode' ) );
+		return $tag;
 	}
 
 	/**
-	 * Filter to modify original shortcodes data and add [$this->name] shortcode.
+	 * Register shortcode arguments.
 	 *
-	 * @since  1.0.0
-	 * @param  array $shortcodes Original plugin shortcodes.
-	 * @return array             Modified array.
+	 * @return array
 	 */
-	public function shortcodes( $shortcodes ) {
+	public function shortcode_args() {
 
-		$terms_list = array();
-
-		if ( did_action( 'wp_ajax_cherry_shortcodes_generator_settings' ) ) {
-			$terms = get_terms( 'group' );
-
-			if ( ! is_wp_error( $terms ) ) {
-				$terms_list = wp_list_pluck( $terms, 'name', 'slug' );
-			}
-		}
-
-		$sizes_list = array();
-		if ( class_exists( 'Cherry_Shortcodes_Tools' ) && method_exists( 'Cherry_Shortcodes_Tools', 'image_sizes' ) ) {
-			$sizes_list = Cherry_Shortcodes_Tools::image_sizes();
-		}
-
-		$shortcodes[ self::$name ] = array(
-			'name'  => __( 'Team', 'cherry-team' ), // Shortcode name.
-			'desc'  => __( 'Cherry team shortcode', 'cherry-team' ),
-			'type'  => 'single', // Can be 'wrap' or 'single'. Example: [b]this is wrapped[/b], [this_is_single]
-			'group' => 'content', // Can be 'content', 'box', 'media' or 'other'. Groups can be mixed
-			'atts'  => array( // List of shortcode params (attributes).
-				'limit' => array(
-					'type'    => 'slider',
-					'min'     => -1,
-					'max'     => 100,
-					'step'    => 1,
-					'default' => 3,
-					'name'    => __( 'Limit', 'cherry-team' ),
-					'desc'    => __( 'Maximum number of posts.', 'cherry-team' ),
-				),
-				'order' => array(
-					'type' => 'select',
-					'values' => array(
-						'desc' => __( 'Descending', 'cherry-team' ),
-						'asc'  => __( 'Ascending', 'su' ),
-					),
-					'default' => 'DESC',
-					'name' => __( 'Order', 'cherry-team' ),
-					'desc' => __( 'Posts order', 'cherry-team' ),
-				),
-				'orderby' => array(
-					'type' => 'select',
-					'values' => array(
-						'none'          => __( 'None', 'cherry-team' ),
-						'id'            => __( 'Post ID', 'cherry-team' ),
-						'author'        => __( 'Post author', 'cherry-team' ),
-						'title'         => __( 'Post title', 'cherry-team' ),
-						'name'          => __( 'Post slug', 'cherry-team' ),
-						'date'          => __( 'Date', 'cherry-team' ),
-						'modified'      => __( 'Last modified date', 'cherry-team' ),
-						'rand'          => __( 'Random', 'cherry-team' ),
-						'comment_count' => __( 'Comments number', 'cherry-team' ),
-						'menu_order'    => __( 'Menu order', 'cherry-team' ),
-					),
-					'default' => 'date',
-					'name'    => __( 'Order by', 'cherry-team' ),
-					'desc'    => __( 'Order posts by', 'cherry-team' ),
-				),
-				'group' => array(
-					'type'     => 'select',
-					'multiple' => true,
-					'values'   => $terms_list,
-					'default'  => '',
-					'name'     => __( 'Groups', 'cherry-team' ),
-					'desc'     => __( 'Select groups to show team members from', 'cherry-team' ),
-				),
-				'id' => array(
-					'default' => 0,
-					'name'    => __( 'Post ID\'s', 'cherry-team' ),
-					'desc'    => __( 'Enter comma separated ID\'s of the posts that you want to show', 'cherry-team' ),
-				),
-				'show_name' => array(
-					'type'    => 'bool',
-					'default' => 'yes',
-					'name' => __( 'Show name?', 'cherry-team' ),
-					'desc'    => __( 'Show name?', 'cherry-team' ),
-				),
-				'show_photo' => array(
-					'type'    => 'bool',
-					'default' => 'yes',
-					'name' => __( 'Show photo?', 'cherry-team' ),
-					'desc'    => __( 'Show photo?', 'cherry-team' ),
-				),
-				'size' => array(
-					'type'    => 'select',
-					'values'  => $sizes_list,
-					'default' => 'thumbnail',
-					'name'    => __( 'Featured image size', 'cherry-team' ),
-					'desc'    => __( 'Select size for a Featured image', 'cherry-team' ),
-				),
-				'excerpt_length' => array(
-					'type'    => 'slider',
-					'min'     => 5,
-					'max'     => 150,
-					'step'    => 1,
-					'default' => 20,
-					'name'    => __( 'Excerpt Length', 'cherry-team' ),
-					'desc'    => __( 'Excerpt length (if used in template)', 'cherry-team' ),
-				),
-				'col' => array(
-					'type'    => 'responsive',
-					'default' => array(
-						'col_xs' => 'none',
-						'col_sm' => 'none',
-						'col_md' => 'none',
-						'col_lg' => 'none',
-					),
-					'name'    => __( 'Column class', 'cherry-team' ),
-					'desc'    => __( 'Column class for each item.', 'cherry-team' ),
-				),
-				'template' => array(
-					'type'   => 'select',
-					'values' => array(
-						'default.tmpl' => 'default.tmpl',
-					),
-					'default' => 'default.tmpl',
-					'name'    => __( 'Template', 'cherry-team' ),
-					'desc'    => __( 'Shortcode template', 'cherry-team' ),
-				),
-				'class' => array(
-					'default' => '',
-					'name'    => __( 'Class', 'cherry-team' ),
-					'desc'    => __( 'Extra CSS class', 'cherry-team' ),
-				),
-			),
-			'icon'     => 'users', // Custom icon (font-awesome).
-			'function' => array( $this, 'do_shortcode' ), // Name of shortcode function.
+		$column_opt = array(
+			1 => 1,
+			2 => 2,
+			3 => 3,
+			4 => 4,
+			6 => 6,
 		);
 
-		return $shortcodes;
+		return apply_filters( 'cherry_team_list_shortcode_arguments', array(
+			'super_title'    => array(
+				'type'  => 'text',
+				'title' => esc_html__( 'Super title', 'cherry-team' ),
+				'value' => '',
+			),
+			'title'          => array(
+				'type'  => 'text',
+				'title' => esc_html__( 'Title', 'cherry-team' ),
+				'value' => '',
+			),
+			'subtitle'       => array(
+				'type'  => 'text',
+				'title' => esc_html__( 'Subtitle', 'cherry-team' ),
+				'value' => '',
+			),
+			'columns'        => array(
+				'type'    => 'select',
+				'title'   => esc_html__( 'Desktop columns', 'cherry-team' ),
+				'value'   => 3,
+				'options' => $column_opt,
+			),
+			'columns_laptop' => array(
+				'type'    => 'select',
+				'title'   => esc_html__( 'Laptop columns', 'cherry-team' ),
+				'value'   => 3,
+				'options' => $column_opt,
+			),
+			'columns_tablet' => array(
+				'type'    => 'select',
+				'title'   => esc_html__( 'Tablet columns', 'cherry-team' ),
+				'value'   => 1,
+				'options' => $column_opt,
+			),
+			'columns_phone'  => array(
+				'type'    => 'select',
+				'title'   => esc_html__( 'Phone columns', 'cherry-team' ),
+				'value'   => 1,
+				'options' => $column_opt,
+			),
+			'posts_per_page' => array(
+				'type'        => 'slider',
+				'title'       => esc_html__( 'Posts per page', 'cherry-team' ),
+				'description' => esc_html__( 'Select how many posts per page do you want to display(-1 means that will show all team)', 'cherry-team' ),
+				'max_value'   => 50,
+				'min_value'   => -1,
+				'value'       => 6,
+			),
+			'group'       => array(
+				'type'       => 'select',
+				'title'      => esc_html__( 'Show team members from groups', 'cherry-team' ),
+				'multiple'   => true,
+				'value'      => '',
+				'class'      => 'cherry-multi-select',
+				'options'    => false,
+				'options_cb' => array( $this, 'get_categories' ),
+			),
+			'id'             => array(
+				'type'  => 'text',
+				'title' => esc_html__( 'Show persons by ID', 'cherry-team' ),
+				'value' => '',
+			),
+			'excerpt_length' => array(
+				'type'        => 'slider',
+				'title'       => esc_html__( 'Description length', 'cherry-team' ),
+				'description' => esc_html__( 'Select how many words show in desciption', 'cherry-team' ),
+				'max_value'   => 200,
+				'min_value'   => 0,
+				'value'       => 20,
+			),
+			'more'           => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show more button', 'cherry-team' ),
+				'description' => esc_html__( 'Show/hide more button', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+					'true_slave'   => 'team-more-filter-visible-true',
+				),
+			),
+			'more_text'      => array(
+				'type'   => 'text',
+				'title'  => esc_html__( 'More button text', 'cherry-team' ),
+				'value'  => esc_html__( 'More', 'cherry-team' ),
+				'master' => 'team-more-filter-visible-true',
+			),
+			'more_url'       => array(
+				'type'   => 'text',
+				'title'  => esc_html__( 'More button text', 'cherry-team' ),
+				'value'  => '#',
+				'master' => 'team-more-filter-visible-true',
+			),
+			'ajax_more'      => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'AJAX load more', 'cherry-team' ),
+				'description' => esc_html__( 'Enable AJAX load more event on more button', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+				'master' => 'team-more-filter-visible-true',
+			),
+			'pagination'     => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Pagination', 'cherry-team' ),
+				'description' => esc_html__( 'Enable paging navigation', 'cherry-team' ),
+				'value'       => 'false',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'show_title'     => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show service title', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'show_media'     => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show service media', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'show_content'   => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show service content', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'show_filters'   => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show filter by category before team listing', 'cherry-team' ),
+				'value'       => 'false',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'image_size'     => array(
+				'type'    => 'select',
+				'title'   => esc_html__( 'Listing item image size (if used in template)', 'cherry-team' ),
+				'value'   => 'thumbnail',
+				'options' => $column_opt,
+			),
+			'template'       => array(
+				'type'    => 'select',
+				'title'   => esc_html__( 'Listing item template', 'cherry-team' ),
+				'value'   => 'default',
+				'options' => $column_opt,
+			),
+			'use_space'      => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Add space between team coumns', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'use_rows_space' => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Add space between team rows', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+		) );
+
+	}
+
+	/**
+	 * Returns team categories list.
+	 *
+	 * @return array
+	 */
+	public function get_categories() {
+		return cherry_team_members()->utilities->utility->satellite->get_terms_array( 'group', 'slug' );
+	}
+
+	/**
+	 * Register team shortcode for shortcodes builder
+	 *
+	 * @return void
+	 */
+	public function register_shortcode_for_builder() {
+
+		cherry_team_members()->get_core()->init_module( 'cherry5-insert-shortcode', array() );
+
+		cherry5_register_shortcode(
+			array(
+				'title'       => esc_html__( 'Team', 'cherry-team' ),
+				'description' => esc_html__( 'Showcase your team with Cherry Team Members plugin', 'cherry-team' ),
+				'icon'        => '<span class="dashicons dashicons-groups"></span>',
+				'slug'        => 'cherry-team-plugin',
+				'shortcodes'  => array(
+					array(
+						'title'       => esc_html__( 'Team', 'cherry-projects' ),
+						'description' => esc_html__( 'Shortcode is used to display the team members list', 'cherry-team' ),
+						'icon'        => '<span class="dashicons dashicons-groups"></span>',
+						'slug'        => $this->tag(),
+						'options'     => $this->shortcode_args(),
+					),
+				),
+			)
+		);
+	}
+
+	/**
+	 * Set defaults callback.
+	 *
+	 * @param array &$item Shortcode fields data.
+	 */
+	public function set_defaults( &$item ) {
+		$item = $item['value'];
 	}
 
 	/**
@@ -251,6 +369,10 @@ class Cherry_Team_Members_Shortcode {
 			'use_space'      => true,
 			'use_rows_space' => true,
 		);
+
+		// Set up the default arguments.
+		$defaults = $this->shortcode_args();
+		array_walk( $defaults, array( $this, 'set_defaults' ) );
 
 		/**
 		 * Parse the arguments.

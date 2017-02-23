@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Team Members
  * Plugin URI:  http://www.templatemonster.com/wordpress-themes.php
  * Description: Cherry Team Members plugin allows you to showcase your team and personnel.
- * Version:     1.0.6
+ * Version:     1.1.0
  * Author:      TemplateMonster
  * Author URI:  http://www.templatemonster.com/
  * Text Domain: cherry-team
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 *
 		 * @var string
 		 */
-		private $version = '1.0.6';
+		private $version = '1.1.0';
 
 		/**
 		 * Plugin dir URL
@@ -83,7 +83,20 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 */
 		private $options = null;
 
+		/**
+		 * Holder for Cherry Utilities instance
+		 *
+		 * @since  1.1.0
+		 * @access public
+		 * @var    object
+		 */
+		public $utilities = null;
 
+		/**
+		 * Database key for options
+		 *
+		 * @var string
+		 */
 		public static $options_key = 'cherry-team';
 
 		/**
@@ -103,6 +116,8 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 			// Load the core functions/classes required by the rest of the theme.
 			add_action( 'after_setup_theme', array( $this, 'get_core' ), 1 );
 			add_action( 'after_setup_theme', array( 'Cherry_Core', 'load_all_modules' ), 2 );
+			//	Initalize required modules
+			add_action( 'init', array( $this, 'init_modules' ), 2 );
 
 			// Register activation and deactivation hook.
 			register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
@@ -262,7 +277,10 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 						'autoload' => false,
 					),
 					'cherry-utility' => array(
-						'autoload' => true,
+						'autoload' => false,
+					),
+					'cherry-handler' => array(
+						'autoload' => false,
 					),
 					'cherry-term-meta' => array(
 						'autoload' => false,
@@ -270,10 +288,28 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 					'cherry-post-meta' => array(
 						'autoload' => false,
 					),
+					'cherry5-insert-shortcode' => array(
+						'autoload' => false,
+					),
 				),
 			) );
 
 			return $this->core;
+		}
+
+		/**
+		 * Manually init required modules.
+		 *
+		 * @return void
+		 */
+		public function init_modules() {
+
+			$this->utilities = $this->get_core()->init_module( 'cherry-utility', array(
+				'meta_key' => array(
+					'term_thumb' => 'cherry_terms_thumbnails',
+				),
+			) );
+
 		}
 
 		/**
