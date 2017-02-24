@@ -213,27 +213,45 @@ class Cherry_Team_Members_Shortcode {
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
 				),
 			),
-			'show_title'     => array(
+			'show_name'     => array(
 				'type'        => 'switcher',
-				'title'       => esc_html__( 'Show service title', 'cherry-team' ),
+				'title'       => esc_html__( 'Show person name', 'cherry-team' ),
 				'value'       => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
 				),
 			),
-			'show_media'     => array(
+			'show_photo'     => array(
 				'type'        => 'switcher',
-				'title'       => esc_html__( 'Show service media', 'cherry-team' ),
+				'title'       => esc_html__( 'Show person photo', 'cherry-team' ),
 				'value'       => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
 				),
 			),
-			'show_content'   => array(
+			'show_desc'   => array(
 				'type'        => 'switcher',
-				'title'       => esc_html__( 'Show service content', 'cherry-team' ),
+				'title'       => esc_html__( 'Show person bio', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'show_position'   => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show person position', 'cherry-team' ),
+				'value'       => 'true',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'show_social'   => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show person social links', 'cherry-team' ),
 				'value'       => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
@@ -250,16 +268,18 @@ class Cherry_Team_Members_Shortcode {
 				),
 			),
 			'image_size'     => array(
-				'type'    => 'select',
-				'title'   => esc_html__( 'Listing item image size (if used in template)', 'cherry-team' ),
-				'value'   => 'thumbnail',
-				'options' => $column_opt,
+				'type'       => 'select',
+				'title'      => esc_html__( 'Listing item image size (if used in template)', 'cherry-team' ),
+				'value'      => 'thumbnail',
+				'options'    => false,
+				'options_cb' => array( cherry_team_members_tools(), 'get_image_sizes' ),
 			),
 			'template'       => array(
-				'type'    => 'select',
-				'title'   => esc_html__( 'Listing item template', 'cherry-team' ),
-				'value'   => 'default',
-				'options' => $column_opt,
+				'type'       => 'select',
+				'title'      => esc_html__( 'Listing item template', 'cherry-team' ),
+				'value'      => 'default',
+				'options'    => false,
+				'options_cb' => array( cherry_team_members_tools(), 'get_templates' ),
 			),
 			'use_space'      => array(
 				'type'        => 'switcher',
@@ -305,13 +325,13 @@ class Cherry_Team_Members_Shortcode {
 			array(
 				'title'       => esc_html__( 'Team', 'cherry-team' ),
 				'description' => esc_html__( 'Showcase your team with Cherry Team Members plugin', 'cherry-team' ),
-				'icon'        => '<span class="dashicons dashicons-groups"></span>',
+				'icon'        => '<span class="dashicons dashicons-businessman"></span>',
 				'slug'        => 'cherry-team-plugin',
 				'shortcodes'  => array(
 					array(
 						'title'       => esc_html__( 'Team', 'cherry-projects' ),
 						'description' => esc_html__( 'Shortcode is used to display the team members list', 'cherry-team' ),
-						'icon'        => '<span class="dashicons dashicons-groups"></span>',
+						'icon'        => '<span class="dashicons dashicons-businessman"></span>',
 						'slug'        => $this->tag(),
 						'options'     => $this->shortcode_args(),
 					),
