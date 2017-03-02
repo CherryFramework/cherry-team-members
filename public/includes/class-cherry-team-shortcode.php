@@ -260,7 +260,7 @@ class Cherry_Team_Members_Shortcode {
 			),
 			'show_filters'   => array(
 				'type'        => 'switcher',
-				'title'       => esc_html__( 'Show filter by category before team listing', 'cherry-team' ),
+				'title'       => esc_html__( 'Show filter by groups before team listing', 'cherry-team' ),
 				'value'       => 'false',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
