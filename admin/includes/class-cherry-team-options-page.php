@@ -101,12 +101,23 @@ class Cherry_Team_Members_Options_Page {
 			return;
 		}
 
+		$permalinks_page = sprintf(
+			'<a href="%s" target="_blank">%s</a>',
+			esc_url( admin_url( 'options-permalink.php' ) ),
+			esc_html__( 'the permalink structure', 'cherry-team' )
+		);
+
+		$pemalinks_notice = sprintf(
+			esc_html__( 'Please save %s every time you change this option', 'cherry-team' ),
+			$permalinks_page
+		);
+
 		$this->options = array(
 			'archive-page' => array(
 				'type'             => 'select',
 				'title'            => esc_html__( 'Select team archive page', 'cherry-team' ),
 				'label'            => '',
-				'description'      => '',
+				'description'      => $pemalinks_notice,
 				'value'            => array(),
 				'options'          => false,
 				'options_callback' => array( cherry_team_members_tools(), 'get_pages' ),
@@ -119,7 +130,7 @@ class Cherry_Team_Members_Options_Page {
 				'value'            => self::$default_options['archive-page-shows'],
 				'options'          => array(
 					'posts'   => esc_html__( 'Default posts listing', 'cherry-team' ),
-					'content' => esc_html__( 'Selected page content', 'cherry-team' ),
+					'content' => esc_html__( 'Selected archive page content', 'cherry-team' ),
 				),
 			),
 			'posts-per-page' => array(

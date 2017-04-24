@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: blank\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-02 16:52+0200\n"
-"PO-Revision-Date: 2017-03-02 16:52+0200\n"
+"POT-Creation-Date: 2017-04-24 17:02+0200\n"
+"PO-Revision-Date: 2017-04-24 17:02+0200\n"
 "Last-Translator: Vladimir Anokhin <ano.vladimir@gmail.com>\n"
 "Language-Team: Cherry Team <support@cherryframework.com>\n"
 "Language: su\n"
@@ -103,67 +103,88 @@ msgstr ""
 msgid "Skill Value"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:106
+#: admin/includes/class-cherry-team-options-page.php:107
+msgid "the permalink structure"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:111
+#, php-format
+msgid "Please save %s every time you change this option"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:118
 msgid "Select team archive page"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:115
+#: admin/includes/class-cherry-team-options-page.php:127
+msgid "Archive page shows"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:132
+msgid "Default posts listing"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:133
+msgid "Selected archive page content"
+msgstr ""
+
+#: admin/includes/class-cherry-team-options-page.php:138
 msgid "Set posts number per archive page"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:123
+#: admin/includes/class-cherry-team-options-page.php:146
 msgid "Select archive page columns number"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:131
+#: admin/includes/class-cherry-team-options-page.php:154
 msgid "Select template for single team member page"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:140
+#: admin/includes/class-cherry-team-options-page.php:163
 msgid "Select image size for single team member page"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:149
+#: admin/includes/class-cherry-team-options-page.php:172
 msgid "Select template for team listing page"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:158
+#: admin/includes/class-cherry-team-options-page.php:181
 msgid "Select image size for listing team member page"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:231
+#: admin/includes/class-cherry-team-options-page.php:254
 msgid "Cherry Team Options"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:232
+#: admin/includes/class-cherry-team-options-page.php:255
 msgid "Settings"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:272
+#: admin/includes/class-cherry-team-options-page.php:295
 msgid "Save"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:273
+#: admin/includes/class-cherry-team-options-page.php:296
 msgid "Define as default"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:274
+#: admin/includes/class-cherry-team-options-page.php:297
 msgid "Restore"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:389
+#: admin/includes/class-cherry-team-options-page.php:412
 msgid "Options have been saved"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:397
+#: admin/includes/class-cherry-team-options-page.php:420
 msgid "Options have been saved as default"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:407
+#: admin/includes/class-cherry-team-options-page.php:430
 msgid "Options have been restored"
 msgstr ""
 
-#: admin/includes/class-cherry-team-options-page.php:467
+#: admin/includes/class-cherry-team-options-page.php:493
 msgid "Please wait, processing the previous request"
 msgstr ""
 
@@ -381,93 +402,94 @@ msgstr ""
 
 #: public/includes/class-cherry-team-init.php:58
 #: public/includes/class-cherry-team-init.php:59
+#: public/includes/class-cherry-team-init.php:163
 #: public/includes/class-cherry-team-shortcode.php:326
 #: public/includes/class-cherry-team-shortcode.php:332
 msgid "Team"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:60
+#: public/includes/class-cherry-team-init.php:61
 msgid "Add New"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:61
+#: public/includes/class-cherry-team-init.php:62
 msgid "Add New Person"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:62
+#: public/includes/class-cherry-team-init.php:63
 msgid "Edit Person"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:63
+#: public/includes/class-cherry-team-init.php:64
 msgid "New Person"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:64
+#: public/includes/class-cherry-team-init.php:65
 msgid "View Person"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:65
+#: public/includes/class-cherry-team-init.php:66
 msgid "Search Persons"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:66
+#: public/includes/class-cherry-team-init.php:67
 msgid "No persons found"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:67
+#: public/includes/class-cherry-team-init.php:68
 msgid "No persons found in trash"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:114
+#: public/includes/class-cherry-team-init.php:188
 msgid "Team Groups"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:115
-#: public/includes/class-cherry-team-init.php:121
+#: public/includes/class-cherry-team-init.php:189
+#: public/includes/class-cherry-team-init.php:195
 msgid "Edit Group"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:116
+#: public/includes/class-cherry-team-init.php:190
 msgid "Search Groups"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:117
+#: public/includes/class-cherry-team-init.php:191
 msgid "Popular Groups"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:118
+#: public/includes/class-cherry-team-init.php:192
 msgid "All Groups"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:122
+#: public/includes/class-cherry-team-init.php:196
 msgid "Update Group"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:123
+#: public/includes/class-cherry-team-init.php:197
 msgid "Add New Group"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:124
+#: public/includes/class-cherry-team-init.php:198
 msgid "New Group Name"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:125
+#: public/includes/class-cherry-team-init.php:199
 msgid "Separate groups with commas"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:126
+#: public/includes/class-cherry-team-init.php:200
 msgid "Add or remove groups"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:127
+#: public/includes/class-cherry-team-init.php:201
 msgid "Choose from the most used groups"
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:128
+#: public/includes/class-cherry-team-init.php:202
 msgid "No groups found."
 msgstr ""
 
-#: public/includes/class-cherry-team-init.php:129
+#: public/includes/class-cherry-team-init.php:203
 msgid "Groups"
 msgstr ""
 

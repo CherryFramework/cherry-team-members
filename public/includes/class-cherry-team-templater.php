@@ -47,7 +47,30 @@ class Cherry_Team_Members_Templater {
 
 		// Add a filter to the template include in order to determine if the page has our template assigned and return it's path.
 		add_filter( 'template_include', array( $this, 'view_template' ) );
+		add_filter( 'request', array( $this, 'maybe_set_archive_page_vars' ) );
 
+	}
+
+	public function maybe_set_archive_page_vars( $query_vars ) {
+
+		if ( 1 !== count( $query_vars ) ) {
+			return $query_vars;
+		}
+
+		if ( empty( $query_vars['post_type'] ) || cherry_team_members_init()->name() !== $query_vars['post_type'] ) {
+			return $query_vars;
+		}
+
+		$page = Cherry_Team_Members_Init::get_archive_page_object();
+
+		if ( ! $page ) {
+			return $query_vars;
+		}
+
+		return array(
+			'page'     => '',
+			'pagename' => $page->post_name,
+		);
 	}
 
 	/**
@@ -61,7 +84,6 @@ class Cherry_Team_Members_Templater {
 
 		$find        = array();
 		$file        = '';
-		$reset_query = false;
 
 		$archive_page = cherry_team_members()->get_option( 'archive-page' );
 		$archive_page = apply_filters( 'wpml_object_id', $archive_page, 'page', true );
@@ -74,7 +96,6 @@ class Cherry_Team_Members_Templater {
 
 			if ( 'content' === $archive_shows ) {
 				$archive_template = 'page.php';
-				$reset_query = true;
 			}
 		}
 
@@ -108,19 +129,12 @@ class Cherry_Team_Members_Templater {
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 
-			if ( $reset_query ) {
-				$this->set_archive_as_page( $archive_page );
-			}
-
 		} elseif ( $archive_page && is_page( $archive_page ) ) {
 
 			$file   = $archive_template;
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
 
-			if ( $reset_query ) {
-				$this->set_archive_as_page( $archive_page );
-			}
 		}
 
 		if ( $file ) {
@@ -131,16 +145,6 @@ class Cherry_Team_Members_Templater {
 		}
 
 		return $template;
-	}
-
-	/**
-	 * Set archive as passed page
-	 *
-	 * @param int $page_id Archive page ID.
-	 */
-	public function set_archive_as_page( $page_id ) {
-		global $wp_query;
-		$wp_query = new WP_Query( array( 'page_id' => $page_id ) );
 	}
 
 	/**
