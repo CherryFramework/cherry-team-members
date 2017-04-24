@@ -61,6 +61,7 @@ class Cherry_Team_Members_Options_Page {
 	 */
 	public static $default_options = array(
 		'archive-page'       => '',
+		'archive-page-shows' => 'posts',
 		'posts-per-page'     => 9,
 		'archive-columns'    => 3,
 		'single-template'    => 'single',
@@ -109,6 +110,17 @@ class Cherry_Team_Members_Options_Page {
 				'value'            => array(),
 				'options'          => false,
 				'options_callback' => array( cherry_team_members_tools(), 'get_pages' ),
+			),
+			'archive-page-shows' => array(
+				'type'             => 'select',
+				'title'            => esc_html__( 'Archive page shows', 'cherry-team' ),
+				'label'            => '',
+				'description'      => '',
+				'value'            => self::$default_options['archive-page-shows'],
+				'options'          => array(
+					'posts'   => esc_html__( 'Default posts listing', 'cherry-team' ),
+					'content' => esc_html__( 'Selected page content', 'cherry-team' ),
+				),
 			),
 			'posts-per-page' => array(
 				'type'       => 'stepper',
@@ -410,6 +422,9 @@ class Cherry_Team_Members_Options_Page {
 
 				break;
 		}
+
+		// Ensure that new post type archive links will generated
+		flush_rewrite_rules();
 
 		wp_send_json( $response );
 

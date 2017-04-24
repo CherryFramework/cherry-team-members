@@ -59,11 +59,26 @@ class Cherry_Team_Members_Templater {
 	 */
 	public function view_template( $template ) {
 
-		$find = array();
-		$file = '';
+		$find        = array();
+		$file        = '';
+		$reset_query = false;
 
 		$archive_page = cherry_team_members()->get_option( 'archive-page' );
 		$archive_page = apply_filters( 'wpml_object_id', $archive_page, 'page', true );
+
+		$archive_template = 'archive-team.php';
+
+		if ( $archive_page ) {
+
+			$archive_shows = cherry_team_members()->get_option( 'archive-page-shows' );
+
+			if ( 'content' === $archive_shows ) {
+				$archive_template = 'page.php';
+				$reset_query = true;
+			}
+		}
+
+
 
 		if ( is_single() && cherry_team_members_init()->name() === get_post_type() ) {
 
@@ -89,15 +104,23 @@ class Cherry_Team_Members_Templater {
 
 		} elseif ( is_post_type_archive( cherry_team_members_init()->name() ) ) {
 
-			$file   = 'archive-team.php';
+			$file   = $archive_template;
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
+
+			if ( $reset_query ) {
+				$this->set_archive_as_page( $archive_page );
+			}
 
 		} elseif ( $archive_page && is_page( $archive_page ) ) {
 
-			$file   = 'archive-team.php';
+			$file   = $archive_template;
 			$find[] = $file;
 			$find[] = cherry_team_members()->template_path() . $file;
+
+			if ( $reset_query ) {
+				$this->set_archive_as_page( $archive_page );
+			}
 		}
 
 		if ( $file ) {
@@ -108,6 +131,16 @@ class Cherry_Team_Members_Templater {
 		}
 
 		return $template;
+	}
+
+	/**
+	 * Set archive as passed page
+	 *
+	 * @param int $page_id Archive page ID.
+	 */
+	public function set_archive_as_page( $page_id ) {
+		global $wp_query;
+		$wp_query = new WP_Query( array( 'page_id' => $page_id ) );
 	}
 
 	/**

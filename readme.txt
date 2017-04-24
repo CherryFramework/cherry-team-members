@@ -3,8 +3,8 @@
 Contributors: TemplateMonster 2002
 Tags: custom post type, team, cherry-framework
 Requires at least: 4.5
-Tested up to: 4.7.3
-Stable tag: 1.1.0
+Tested up to: 4.7.4
+Stable tag: 1.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -78,6 +78,11 @@ The plugin offers simplified templating system for .tmpl files. 3 templates are 
 Standard templates can be rewritten in the theme. For that you need to create cherry-team folder in the root catalog of the theme and copy the necessary templates in there. You can also add your own templates. For that you need to create a file with .tmpl extension in the same folder.
 
 == Changelog ==
+
+= 1.2.0 =
+
+* ADD: New option 'Arcive page shows'
+* UPD: Plugin rewrite URL logic
 
 = 1.1.0 =
 

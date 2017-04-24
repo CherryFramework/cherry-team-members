@@ -57,6 +57,7 @@ class Cherry_Team_Members_Init {
 		$labels = array(
 			'name'               => __( 'Team', 'cherry-team' ),
 			'singular_name'      => __( 'Team', 'cherry-team' ),
+			'archive_title'      =>self::get_archive_title(),
 			'add_new'            => __( 'Add New', 'cherry-team' ),
 			'add_new_item'       => __( 'Add New Person', 'cherry-team' ),
 			'edit_item'          => __( 'Edit Person', 'cherry-team' ),
@@ -84,7 +85,7 @@ class Cherry_Team_Members_Init {
 			'capability_type' => 'post',
 			'hierarchical'    => false, // Hierarchical causes memory issues - WP loads all records!
 			'rewrite'         => array(
-				'slug'       => 'team',
+				'slug'       => self::get_rewrite_slug(),
 				'with_front' => false,
 				'feeds'      => true,
 			),
@@ -98,6 +99,79 @@ class Cherry_Team_Members_Init {
 		$args = apply_filters( 'cherry_team_post_type_args', $args );
 
 		register_post_type( self::$name, $args );
+
+	}
+
+	/**
+	 * Returns archive page object if set in options.
+	 *
+	 * @return WP_Post|false
+	 */
+	public function get_archive_page_object() {
+
+		$archive_page = cherry_team_members()->get_option( 'archive-page' );
+
+		if ( ! $archive_page ) {
+			return false;
+		}
+
+		$page = wp_cache_get( 'cherry-team-archive-page' );
+
+		if ( is_object( $page ) ) {
+			return $page;
+		}
+
+		$page = get_post( $archive_page );
+
+		if ( $page && ! is_wp_error( $page ) ) {
+			wp_cache_add( 'cherry-team-archive-page', $page );
+			return $page;
+		} else {
+			return false;
+		}
+
+	}
+
+	/**
+	 * Returns archive rewrite slug
+	 *
+	 * @return string
+	 */
+	public static function get_rewrite_slug() {
+
+		$default = 'team';
+		$page    = self::get_archive_page_object();
+
+		if ( ! $page ) {
+			return $default;
+		}
+
+		if ( isset( $page->post_name ) ) {
+			return $page->post_name;
+		}
+
+		return $default;
+	}
+
+	/**
+	 * Returns archive title
+	 *
+	 * @return string
+	 */
+	public static function get_archive_title() {
+
+		$default = esc_html__( 'Team', 'cherry-team' );
+		$page    = self::get_archive_page_object();
+
+		if ( ! $page ) {
+			return $default;
+		}
+
+		if ( isset( $page->post_title ) ) {
+			return $page->post_title;
+		}
+
+		return $default;
 
 	}
 
