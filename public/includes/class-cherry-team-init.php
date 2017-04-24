@@ -107,7 +107,7 @@ class Cherry_Team_Members_Init {
 	 *
 	 * @return WP_Post|false
 	 */
-	public function get_archive_page_object() {
+	public static function get_archive_page_object() {
 
 		$archive_page = cherry_team_members()->get_option( 'archive-page' );
 
