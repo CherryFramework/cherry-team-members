@@ -48,6 +48,8 @@ class Cherry_Team_Members_Shortcode {
 
 		// Register shortcode on 'init'.
 		add_action( 'init', array( $this, 'register_shortcode' ) );
+		add_action( 'elementor/widgets/widgets_registered', array( $this, 'register_elementor_widget' ) );
+		add_action( 'cherry_team_members_elementor_get_shortcode_args', array( $this, 'shortcode_args' ) );
 
 		$this->data = Cherry_Team_Members_Data::get_instance();
 	}
@@ -64,6 +66,16 @@ class Cherry_Team_Members_Shortcode {
 		if ( is_admin() ) {
 			$this->register_shortcode_for_builder();
 		}
+	}
+
+	/**
+	 * Register elementor widget
+	 *
+	 * @return void
+	 */
+	public function register_elementor_widget( $widgets_manager ) {
+		require cherry_team_members()->plugin_path( 'public/includes/extensions/class-cherry-team-elementor.php' );
+		$widgets_manager->register_widget_type( new Elementor\Widget_Cherry_Team );
 	}
 
 	/**

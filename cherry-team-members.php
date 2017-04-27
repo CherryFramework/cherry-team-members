@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Team Members
  * Plugin URI:  http://www.templatemonster.com/wordpress-themes.php
  * Description: Cherry Team Members plugin allows you to showcase your team and personnel.
- * Version:     1.2.1
+ * Version:     1.3.0
  * Author:      TemplateMonster
  * Author URI:  http://www.templatemonster.com/
  * Text Domain: cherry-team
