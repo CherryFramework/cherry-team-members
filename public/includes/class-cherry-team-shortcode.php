@@ -47,26 +47,11 @@ class Cherry_Team_Members_Shortcode {
 	public function __construct() {
 
 		// Register shortcode on 'init'.
-		add_action( 'init', array( $this, 'register_shortcode' ) );
-		add_action( 'elementor/init', array( $this, 'register_elementor_category' ) );
-		add_action( 'elementor/widgets/widgets_registered', array( $this, 'register_elementor_widget' ) );
+		add_action( 'init', array( $this, 'register_shortcode' ), 0 );
 		add_action( 'cherry_team_members_elementor_get_shortcode_args', array( $this, 'shortcode_args' ) );
 
 		$this->data = Cherry_Team_Members_Data::get_instance();
 	}
-
-	public function register_elementor_category(){
-
-		Elementor\Plugin::instance()->elements_manager->add_category(
-			'cherry',
-			array(
-				'title' => esc_html__( 'Cherry Addons', 'cherry-team' ),
-				'icon'  => 'font',
-			),
-			1
-		);
-	}
-
 
 	/**
 	 * Registers the [$this->name] shortcode.
@@ -77,19 +62,26 @@ class Cherry_Team_Members_Shortcode {
 
 		add_shortcode( $this->tag(), array( $this, 'do_shortcode' ) );
 
+		$base = cherry_team_members();
+
+		if ( defined( 'ELEMENTOR_VERSION' ) ) {
+
+			require $base->plugin_path( 'public/includes/ext/class-cherry-team-elementor-compat.php' );
+
+			cherry_team_members_elementor_compat( array(
+				$this->tag() => array(
+					'title' => esc_html__( 'Cherry Team', 'cherry-team' ),
+					'file'  => $base->plugin_path( 'public/includes/ext/class-cherry-team-elementor-module.php' ),
+					'class' => 'Cherry_Team_Elementor_Widget',
+					'icon'  => 'eicon-person',
+					'atts'  => $this->shortcode_args(),
+				),
+			) );
+		}
+
 		if ( is_admin() ) {
 			$this->register_shortcode_for_builder();
 		}
-	}
-
-	/**
-	 * Register elementor widget
-	 *
-	 * @return void
-	 */
-	public function register_elementor_widget( $widgets_manager ) {
-		require cherry_team_members()->plugin_path( 'public/includes/extensions/class-cherry-team-elementor.php' );
-		$widgets_manager->register_widget_type( new Elementor\Widget_Cherry_Team );
 	}
 
 	/**
@@ -335,7 +327,10 @@ class Cherry_Team_Members_Shortcode {
 	 * @return array
 	 */
 	public function get_categories() {
-		return cherry_team_members()->utilities->utility->satellite->get_terms_array( 'group', 'slug' );
+		return array_merge(
+			array( '' => esc_html__( 'From All', 'cherry-team' ) ),
+			cherry_team_members()->utilities->utility->satellite->get_terms_array( 'group', 'slug' )
+		);
 	}
 
 	/**
