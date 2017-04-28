@@ -18,7 +18,7 @@ class Widget_Cherry_Team extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return array( 'general-elements' );
+		return array( 'cherry' );
 	}
 
 	public function is_reload_preview_required() {
@@ -77,6 +77,10 @@ class Widget_Cherry_Team extends Widget_Base {
 				'default' => array( $arg['value'] ),
 			);
 
+			if ( 'switcher' === $arg['type'] ) {
+				$mapped_args['default'] = ( 'true' === $arg['value'] ) ? 'yes' : '';
+			}
+
 			if ( isset( $arg['options'] ) ) {
 				$mapped_args['options'] = $arg['options'];
 			}
@@ -106,14 +110,24 @@ class Widget_Cherry_Team extends Widget_Base {
 
 	protected function render() {
 
-		$settings = $this->get_settings();
-
+		$settings       = $this->get_settings();
 		$shortcode      = '[cherry_team%s]';
 		$shortcode_atts = '';
 		$args           = apply_filters( 'cherry_team_members_elementor_get_shortcode_args', array() );
 
 		foreach ( $args as $name => $arg ) {
-			$shortcode_atts .= sprintf( ' %1$s="%2$s"', $name, $settings[ $name ][0] );
+
+			if ( ! is_array( $settings[ $name ] ) ) {
+				$val = $settings[ $name ];
+			} else {
+				if ( isset( $settings[ $name ]['size'] ) ) {
+					$val = $settings[ $name ]['size'];
+				} else {
+					$val = $settings[ $name ][0];
+				}
+			}
+
+			$shortcode_atts .= sprintf( ' %1$s="%2$s"', $name, $val );
 		}
 
 		?>
