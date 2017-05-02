@@ -45,7 +45,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 *
 		 * @var string
 		 */
-		private $version = '1.2.1';
+		private $version = '1.3.0';
 
 		/**
 		 * Plugin dir URL

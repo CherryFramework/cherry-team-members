@@ -1,7 +1,7 @@
 === Cherry Team Members ===
 
 Contributors: TemplateMonster 2002
-Tags: custom post type, team, cherry-framework
+Tags: custom post type, team, cherry-framework, elementor, elementor builder
 Requires at least: 4.5
 Tested up to: 4.7.4
 Stable tag: 1.3.0
