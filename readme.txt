@@ -14,6 +14,8 @@ Cherry Team Members plugin allows you to showcase your team and personnel.
 
 The plugin is specially designed to make it easier for the businesses to display info about their team and personnel. It contains a full set of options and tools that will help adjust the profile in accordance with the skills and the position of the members.
 
+**Completely integrated with Elementor page builder!**
+
 == Installation ==
 
 1. Upload "Cherry Team Members" folder to the "/wp-content/plugins/" directory
