@@ -181,6 +181,10 @@ class Cherry_Team_Elementor_Widget extends Elementor\Widget_Base {
 
 		foreach ( $args as $name => $arg ) {
 
+			if ( empty( $settings[ $name ] ) ) {
+				continue;
+			}
+
 			if ( ! is_array( $settings[ $name ] ) ) {
 				$val = $settings[ $name ];
 			} else {

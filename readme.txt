@@ -4,11 +4,11 @@ Contributors: TemplateMonster 2002
 Tags: custom post type, team, cherry-framework, elementor, elementor builder
 Requires at least: 4.5
 Tested up to: 4.7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Cherry Team Members plugin allows you to showcase your team and personnel.
+Cherry Team Members plugin allows you to showcase your team and personnel. Integrated with Elementor page builder.
 
 == Description ==
 
@@ -80,6 +80,10 @@ The plugin offers simplified templating system for .tmpl files. 3 templates are 
 Standard templates can be rewritten in the theme. For that you need to create cherry-team folder in the root catalog of the theme and copy the necessary templates in there. You can also add your own templates. For that you need to create a file with .tmpl extension in the same folder.
 
 == Changelog ==
+
+= 1.3.1 =
+
+* FIX: Prevent PHP notices in Elementor module
 
 = 1.3.0 =
 
