@@ -218,7 +218,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 				'cherry-team',
 				$this->plugin_url( 'public/assets/js/cherry-team.js' ),
 				array( 'cherry-js-core' ),
-				'1.0.0',
+				apply_filters( 'cherry_team_public_scripts_ver', $this->version() ),
 				true
 			);
 

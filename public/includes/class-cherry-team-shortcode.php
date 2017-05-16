@@ -79,6 +79,10 @@ class Cherry_Team_Members_Shortcode {
 			) );
 		}
 
+		if ( defined( 'WPB_VC_VERSION' ) ) {
+			$this->add_vc_compat();
+		}
+
 		if ( is_admin() ) {
 			$this->register_shortcode_for_builder();
 		}
@@ -137,24 +141,28 @@ class Cherry_Team_Members_Shortcode {
 				'type'    => 'select',
 				'title'   => esc_html__( 'Desktop columns', 'cherry-team' ),
 				'value'   => 3,
+				'default' => 3,
 				'options' => $column_opt,
 			),
 			'columns_laptop' => array(
 				'type'    => 'select',
 				'title'   => esc_html__( 'Laptop columns', 'cherry-team' ),
 				'value'   => 3,
+				'default' => 3,
 				'options' => $column_opt,
 			),
 			'columns_tablet' => array(
 				'type'    => 'select',
 				'title'   => esc_html__( 'Tablet columns', 'cherry-team' ),
 				'value'   => 1,
+				'default' => 1,
 				'options' => $column_opt,
 			),
 			'columns_phone'  => array(
 				'type'    => 'select',
 				'title'   => esc_html__( 'Phone columns', 'cherry-team' ),
 				'value'   => 1,
+				'default' => 1,
 				'options' => $column_opt,
 			),
 			'posts_per_page' => array(
@@ -192,6 +200,7 @@ class Cherry_Team_Members_Shortcode {
 				'title'       => esc_html__( 'Show more button', 'cherry-team' ),
 				'description' => esc_html__( 'Show/hide more button', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -215,6 +224,7 @@ class Cherry_Team_Members_Shortcode {
 				'title'       => esc_html__( 'AJAX load more', 'cherry-team' ),
 				'description' => esc_html__( 'Enable AJAX load more event on more button', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -226,6 +236,7 @@ class Cherry_Team_Members_Shortcode {
 				'title'       => esc_html__( 'Pagination', 'cherry-team' ),
 				'description' => esc_html__( 'Enable paging navigation', 'cherry-team' ),
 				'value'       => 'false',
+				'default'     => 'false',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -235,6 +246,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Show person name', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -244,6 +256,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Show person photo', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -253,6 +266,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Show person bio', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -262,6 +276,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Show person position', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -271,6 +286,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Show person social links', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -280,6 +296,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Show filter by groups before team listing', 'cherry-team' ),
 				'value'       => 'false',
+				'default'     => 'false',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -289,6 +306,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'       => 'select',
 				'title'      => esc_html__( 'Listing item image size (if used in template)', 'cherry-team' ),
 				'value'      => 'thumbnail',
+				'default'    => 'thumbnail',
 				'options'    => false,
 				'options_cb' => array( cherry_team_members_tools(), 'get_image_sizes' ),
 			),
@@ -296,6 +314,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'       => 'select',
 				'title'      => esc_html__( 'Listing item template', 'cherry-team' ),
 				'value'      => 'default',
+				'default'    => 'default',
 				'options'    => false,
 				'options_cb' => array( cherry_team_members_tools(), 'get_templates' ),
 			),
@@ -303,6 +322,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Add space between team coumns', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -312,6 +332,7 @@ class Cherry_Team_Members_Shortcode {
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Add space between team rows', 'cherry-team' ),
 				'value'       => 'true',
+				'default'     => 'true',
 				'toggle'      => array(
 					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
@@ -359,6 +380,12 @@ class Cherry_Team_Members_Shortcode {
 				),
 			)
 		);
+	}
+
+	public function add_vc_compat() {
+		require_once( cherry_team_members()->plugin_path( 'public/includes/ext/visual-composer/class-cherry-team-vc-mapping.php' ) );
+
+		cherry_team_members_vc_mapping( $this->tag(), $this->shortcode_args() );
 	}
 
 	/**
