@@ -327,10 +327,14 @@ class Cherry_Team_Members_Shortcode {
 	 * @return array
 	 */
 	public function get_categories() {
-		return array_merge(
-			array( '' => esc_html__( 'From All', 'cherry-team' ) ),
-			cherry_team_members()->utilities->utility->satellite->get_terms_array( 'group', 'slug' )
-		);
+
+		$categories = cherry_team_members()->utilities->utility->satellite->get_terms_array( 'group', 'slug' );
+
+		if ( empty( $categories ) ) {
+			$categories = array();
+		}
+
+		return array_merge( array( '' => esc_html__( 'From All', 'cherry-team' ) ), $categories );
 	}
 
 	/**
