@@ -86,6 +86,8 @@ class Cherry_Team_Members_Data {
 			'show_desc'      => true,
 			'show_position'  => true,
 			'show_social'    => true,
+			'show_item_more' => false,
+			'item_more_text' => '',
 			'show_filters'   => false,
 			'use_space'      => true,
 			'use_rows_space' => true,

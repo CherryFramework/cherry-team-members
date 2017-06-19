@@ -442,6 +442,39 @@ class Cherry_Team_Members_Template_Callbacks {
 	}
 
 	/**
+	 * Button macros
+	 *
+	 * @return string
+	 */
+	public function get_button( $args = array() ) {
+
+		if ( ! isset( $this->atts['show_item_more'] ) ) {
+			$this->atts['show_item_more'] = true;
+		}
+
+		$this->atts['show_item_more'] = filter_var( $this->atts['show_item_more'], FILTER_VALIDATE_BOOLEAN );
+
+		if ( ! $this->atts['show_item_more'] ) {
+			return;
+		}
+
+		$args = wp_parse_args( $args, array(
+			'class' => 'btn btn-primary',
+			'label' => esc_html__( 'Read more', 'cherry-team' ),
+		) );
+
+		$label = ! empty( $this->atts['item_more_text'] ) ? $this->atts['item_more_text'] : $args['label'];
+
+		$format = apply_filters(
+			'cherry_team_button_format',
+			'<a href="%1$s" class="%2$s">%3$s</a>'
+		);
+
+		return sprintf( $format, get_permalink(), $args['class'], wp_kses_post( $label ) );
+
+	}
+
+	/**
 	 * Get link URL to team member page
 	 */
 	public function get_link() {

@@ -69,6 +69,7 @@ if ( ! class_exists( 'Cherry_Team_Members_Ajax' ) ) {
 				'show_desc',
 				'show_position',
 				'show_social',
+				'show_item_more',
 				'show_filters',
 				'ajax_more',
 				'more',

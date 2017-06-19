@@ -276,6 +276,20 @@ class Cherry_Team_Members_Shortcode {
 					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
 				),
 			),
+			'show_item_more'   => array(
+				'type'        => 'switcher',
+				'title'       => esc_html__( 'Show service item Read More button (if allowed in template)', 'cherry-team' ),
+				'value'       => 'false',
+				'toggle'      => array(
+					'true_toggle'  => esc_html__( 'Yes', 'cherry-team' ),
+					'false_toggle' => esc_html__( 'No', 'cherry-team' ),
+				),
+			),
+			'item_more_text' => array(
+				'type'   => 'text',
+				'title'  => esc_html__( 'Item Read More button text (if empty - used default value from template)', 'cherry-team' ),
+				'value'  => '',
+			),
 			'show_filters'   => array(
 				'type'        => 'switcher',
 				'title'       => esc_html__( 'Show filter by groups before team listing', 'cherry-team' ),
@@ -453,6 +467,7 @@ class Cherry_Team_Members_Shortcode {
 			'show_desc',
 			'show_position',
 			'show_social',
+			'show_item_more',
 			'show_filters',
 			'ajax_more',
 			'more',
@@ -485,6 +500,8 @@ class Cherry_Team_Members_Shortcode {
 			'show_desc'      => 'show_desc',
 			'show_position'  => 'show_position',
 			'show_social'    => 'show_social',
+			'show_item_more' => 'show_item_more',
+			'item_more_text' => 'item_more_text',
 			'show_filters'   => 'show_filters',
 			'template'       => 'template',
 			'pager'          => 'pagination',
