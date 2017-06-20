@@ -206,7 +206,7 @@ class Cherry_Team_Members_Shortcode {
 			),
 			'more_url'       => array(
 				'type'   => 'text',
-				'title'  => esc_html__( 'More button text', 'cherry-team' ),
+				'title'  => esc_html__( 'More button URL', 'cherry-team' ),
 				'value'  => '#',
 				'master' => 'team-more-filter-visible-true',
 			),
