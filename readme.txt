@@ -3,8 +3,8 @@
 Contributors: TemplateMonster 2002
 Tags: custom post type, team, cherry-framework, elementor, elementor builder
 Requires at least: 4.5
-Tested up to: 4.7.5
-Stable tag: 1.3.2
+Tested up to: 4.8.0
+Stable tag: 1.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,45 +79,3 @@ The plugin offers simplified templating system for .tmpl files. 3 templates are 
 
 Standard templates can be rewritten in the theme. For that you need to create cherry-team folder in the root catalog of the theme and copy the necessary templates in there. You can also add your own templates. For that you need to create a file with .tmpl extension in the same folder.
 
-== Changelog ==
-
-= 1.3.2 =
-
-* FIX: Minor fixes.
-
-= 1.3.1 =
-
-* FIX: Prevent PHP notices in Elementor module
-
-= 1.3.0 =
-
-* ADD: Integrates as module into elementor builder.
-
-= 1.2.1 =
-
-* FIX: Minor fixes
-
-= 1.2.0 =
-
-* ADD: New option 'Arcive page shows'
-* UPD: Plugin rewrite URL logic
-
-= 1.1.0 =
-
-* ADD: Insert shortcode button in editor
-
-= 1.0.6 =
-
-* ADD: Cherry Search compatibility
-
-= 1.0.3 =
-
-* UPD: getting templates method
-
-= 1.0.1 =
-
-* UPD: framework version
-
-= 1.0.0 =
-
-* Initial release

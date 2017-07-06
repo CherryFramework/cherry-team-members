@@ -68,7 +68,7 @@ class Cherry_Team_Members_Shortcode {
 
 			require $base->plugin_path( 'public/includes/ext/class-cherry-team-elementor-compat.php' );
 
-			cherry_team_members_elementor_compat( array(
+			cherry_team_members()->elementor_compat = cherry_team_members_elementor_compat( array(
 				$this->tag() => array(
 					'title' => esc_html__( 'Cherry Team', 'cherry-team' ),
 					'file'  => $base->plugin_path( 'public/includes/ext/class-cherry-team-elementor-module.php' ),

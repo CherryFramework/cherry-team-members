@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Cherry Team Members
- * Plugin URI:  http://www.templatemonster.com/wordpress-themes.php
+ * Plugin URI:
  * Description: Cherry Team Members plugin allows you to showcase your team and personnel.
- * Version:     1.3.2
- * Author:      TemplateMonster
- * Author URI:  http://www.templatemonster.com/
+ * Version:     1.4.0
+ * Author:      JetImpex
+ * Author URI:  https://jetimpex.com/wordpress/
  * Text Domain: cherry-team
  * License:     GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 *
 		 * @var string
 		 */
-		private $version = '1.3.2';
+		private $version = '1.4.0';
 
 		/**
 		 * Plugin dir URL
@@ -98,6 +98,13 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 * @var string
 		 */
 		public static $options_key = 'cherry-team';
+
+		/**
+		 * Elemntor compat instance
+		 *
+		 * @var object
+		 */
+		public $elementor_compat = null;
 
 		/**
 		 * Sets up needed actions/filters for the plugin to initialize.

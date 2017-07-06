@@ -210,7 +210,11 @@ class Cherry_Team_Elementor_Widget extends Elementor\Widget_Base {
 
 		?>
 		<div class="elementor-<?php $this->tag; ?>"><?php
-			echo do_shortcode( sprintf( $shortcode, $this->tag, $shortcode_atts ) );
+			if ( cherry_team_members()->elementor_compat->in_elementor() ) {
+				echo do_shortcode( sprintf( $shortcode, $this->tag, $shortcode_atts ) );
+			} else {
+				echo sprintf( $shortcode, $this->tag, $shortcode_atts );
+			}
 		?></div>
 		<?php
 	}
