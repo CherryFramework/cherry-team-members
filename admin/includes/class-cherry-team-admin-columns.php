@@ -95,6 +95,10 @@ class Cherry_Team_Members_Admin_Columns {
 			wp_die( 'No post to duplicate has been supplied!' );
 		}
 
+		if ( ! current_user_can( 'edit_post', $_REQUEST['post'] ) ) {
+			wp_die( 'You don\'t have permissions to do this' );
+		}
+
 		global $wpdb;
 
 		$post_id         = absint( $_REQUEST['post'] );
