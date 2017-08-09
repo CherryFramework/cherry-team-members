@@ -56,6 +56,10 @@ class Cherry_Team_Members_Admin_Columns {
 			return $actions;
 		}
 
+		if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+			return $actions;
+		}
+
 		if ( cherry_team_members_init()->name() !== $post->post_type ) {
 			return $actions;
 		}
