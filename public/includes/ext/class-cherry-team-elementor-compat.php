@@ -52,6 +52,17 @@ if ( ! class_exists( 'Cherry_Team_Members_Elementor_Compat' ) ) {
 			add_action( 'elementor/widgets/widgets_registered', array( $this, 'register_widgets' ) );
 
 			add_action( 'wp_ajax_elementor_render_widget', array( $this, 'set_elementor_ajax' ), 10, -1 );
+
+			add_action( 'elementor/frontend/before_enqueue_scripts', array( $this, 'assets' ) );
+		}
+
+		/**
+		 * Ensure that team script correctly enqueued
+		 *
+		 * @return void
+		 */
+		public function assets() {
+			wp_enqueue_script( 'cherry-team' );
 		}
 
 		/**

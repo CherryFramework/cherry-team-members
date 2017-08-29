@@ -34,14 +34,6 @@ class Cherry_Team_Members_Data {
 	private $query_args = array();
 
 	/**
-	 * Holder for the main query object, while team query processing
-	 *
-	 * @since 1.0.0
-	 * @var   object
-	 */
-	private $temp_query = null;
-
-	/**
 	 * Sets up our actions/filters.
 	 *
 	 * @since 1.0.0
@@ -153,12 +145,6 @@ class Cherry_Team_Members_Data {
 		// The Query.
 		$query = $this->get_team( $args );
 
-		global $wp_query;
-
-		$this->temp_query = $wp_query;
-		$wp_query = null;
-		$wp_query = $query;
-
 		// Fix boolean.
 		if ( isset( $args['pager'] ) && ( ( 'true' == $args['pager'] ) || true === $args['pager'] ) ) {
 			$args['pager'] = true;
@@ -167,13 +153,6 @@ class Cherry_Team_Members_Data {
 		}
 
 		$args['more'] = filter_var( $args['more'], FILTER_VALIDATE_BOOLEAN );
-
-		// The Display.
-		if ( ! $query || is_wp_error( $query ) ) {
-			$wp_query = null;
-			$wp_query = $this->temp_query;
-			return;
-		}
 
 		$css_classes = array( 'cherry-team' );
 
@@ -229,13 +208,10 @@ class Cherry_Team_Members_Data {
 		$output .= '</div>';
 
 		if ( true == $args['more'] ) {
-			$output .= $this->get_more_button( $args );
+			$output .= $this->get_more_button( $args, $query );
 		} elseif ( true === $args['pager'] ) {
-			$output .= $this->get_pagination();
+			$output .= $this->get_pagination( $query );
 		}
-
-		$wp_query = null;
-		$wp_query = $this->temp_query;
 
 		/**
 		 * Filters HTML-formatted team before display or return.
@@ -303,6 +279,7 @@ class Cherry_Team_Members_Data {
 		$this->query_args['posts_per_page']   = $args['limit'];
 		$this->query_args['orderby']          = $args['orderby'];
 		$this->query_args['order']            = $args['order'];
+		$this->query_args['post_status']      = 'publish';
 		$this->query_args['suppress_filters'] = false;
 
 		if ( ! empty( $args['group'] ) ) {
@@ -408,8 +385,7 @@ class Cherry_Team_Members_Data {
 	public function get_more_button( $atts = array(), $query = null ) {
 
 		if ( ! $query ) {
-			global $wp_query;
-			$query = $wp_query;
+			return false;
 		}
 
 		$atts = wp_parse_args( $atts, array(
@@ -533,9 +509,7 @@ class Cherry_Team_Members_Data {
 	 * @param  array $args  The array of arguments.
 	 * @return string
 	 */
-	public function get_team_loop( $query, $args ) {
-
-		global $post, $more;
+	public function get_team_loop( $team_query, $args ) {
 
 		// Item template.
 		$template = cherry_team_members_templater()->get_template_by_name(
@@ -555,13 +529,15 @@ class Cherry_Team_Members_Data {
 		$count  = 1;
 		$output = '';
 
-		if ( ! is_object( $query ) || ! is_array( $query->posts ) ) {
+		if ( ! is_object( $team_query ) || ! is_array( $team_query->posts ) ) {
 			return false;
 		}
 
 		$callbacks = cherry_team_members_templater()->setup_template_data( $args );
 
-		foreach ( $query->posts as $post ) {
+		global $post;
+
+		foreach ( $team_query->posts as $post ) {
 
 			// Sets up global post data.
 			setup_postdata( $post );
@@ -620,7 +596,6 @@ class Cherry_Team_Members_Data {
 
 		}
 
-		// Restore the global $post variable.
 		wp_reset_postdata();
 
 		return $output;
