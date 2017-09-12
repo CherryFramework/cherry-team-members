@@ -145,6 +145,22 @@ class Cherry_Team_Members_Data {
 		// The Query.
 		$query = $this->get_team( $args );
 
+		if ( ! $query ) {
+
+			wp_reset_query();
+			wp_reset_postdata();
+
+			$output = esc_html__( 'There are no team members found.', 'cherry-team' );
+
+			if ( true != $args['echo'] ) {
+				return $output;
+			}
+
+			// If "echo" is set to true.
+			echo $output;
+
+		}
+
 		// Fix boolean.
 		if ( isset( $args['pager'] ) && ( ( 'true' == $args['pager'] ) || true === $args['pager'] ) ) {
 			$args['pager'] = true;

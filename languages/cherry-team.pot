@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: blank\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-03 15:18+0200\n"
-"PO-Revision-Date: 2017-08-03 15:18+0200\n"
+"POT-Creation-Date: 2017-09-12 13:02+0200\n"
+"PO-Revision-Date: 2017-09-12 13:02+0200\n"
 "Last-Translator: Vladimir Anokhin <ano.vladimir@gmail.com>\n"
 "Language-Team: Cherry Team <support@cherryframework.com>\n"
 "Language: su\n"
@@ -18,29 +18,29 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/includes/class-cherry-team-admin-columns.php:74
+#: admin/includes/class-cherry-team-admin-columns.php:78
 msgid "Clone"
 msgstr ""
 
-#: admin/includes/class-cherry-team-admin-columns.php:75
+#: admin/includes/class-cherry-team-admin-columns.php:79
 msgid "Clone this post"
 msgstr ""
 
-#: admin/includes/class-cherry-team-admin-columns.php:200
+#: admin/includes/class-cherry-team-admin-columns.php:208
 msgid "Photo"
 msgstr ""
 
-#: admin/includes/class-cherry-team-admin-columns.php:201
+#: admin/includes/class-cherry-team-admin-columns.php:209
 #: admin/includes/class-cherry-team-meta-boxes.php:59
 #: admin/includes/class-cherry-team-meta-boxes.php:60
 msgid "Position"
 msgstr ""
 
-#: admin/includes/class-cherry-team-admin-columns.php:202
+#: admin/includes/class-cherry-team-admin-columns.php:210
 msgid "Group"
 msgstr ""
 
-#: admin/includes/class-cherry-team-admin-columns.php:203
+#: admin/includes/class-cherry-team-admin-columns.php:211
 msgid "Added"
 msgstr ""
 
@@ -410,14 +410,18 @@ msgstr ""
 msgid "Shortcode not a have options."
 msgstr ""
 
-#: public/includes/class-cherry-team-data.php:81
-#: public/includes/class-cherry-team-data.php:416
+#: public/includes/class-cherry-team-data.php:73
+#: public/includes/class-cherry-team-data.php:408
 #: public/includes/class-cherry-team-shortcode.php:204
 #: public/includes/class-cherry-team-shortcode.php:416
 msgid "More"
 msgstr ""
 
-#: public/includes/class-cherry-team-data.php:723
+#: public/includes/class-cherry-team-data.php:153
+msgid "There are no team members found."
+msgstr ""
+
+#: public/includes/class-cherry-team-data.php:714
 msgid "All"
 msgstr ""
 
@@ -679,6 +683,6 @@ msgstr ""
 msgid "Select page..."
 msgstr ""
 
-#: public/includes/ext/class-cherry-team-elementor-compat.php:118
+#: public/includes/ext/class-cherry-team-elementor-compat.php:129
 msgid "Cherry Addons"
 msgstr ""
