@@ -3,9 +3,9 @@
  * Plugin Name: Cherry Team Members
  * Plugin URI:
  * Description: Cherry Team Members plugin allows you to showcase your team and personnel.
- * Version:     1.4.4
- * Author:      JetImpex
- * Author URI:  https://jetimpex.com/wordpress/
+ * Version:     1.4.4.1
+ * Author:      Zemez
+ * Author URI:  https://zemez.io/wordpress/
  * Text Domain: cherry-team
  * License:     GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Cherry_Team_Members' ) ) {
 		 *
 		 * @var string
 		 */
-		private $version = '1.4.4';
+		private $version = '1.4.4.1';
 
 		/**
 		 * Plugin dir URL
