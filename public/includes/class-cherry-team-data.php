@@ -147,7 +147,6 @@ class Cherry_Team_Members_Data {
 
 		if ( ! $query ) {
 
-			wp_reset_query();
 			wp_reset_postdata();
 
 			$output = esc_html__( 'There are no team members found.', 'cherry-team' );
@@ -239,7 +238,6 @@ class Cherry_Team_Members_Data {
 		 */
 		$output = apply_filters( 'cherry_team_html', $output, $query, $args );
 
-		wp_reset_query();
 		wp_reset_postdata();
 
 		if ( true != $args['echo'] ) {

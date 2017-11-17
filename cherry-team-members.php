@@ -3,7 +3,7 @@
  * Plugin Name: Cherry Team Members
  * Plugin URI:
  * Description: Cherry Team Members plugin allows you to showcase your team and personnel.
- * Version:     1.4.4.2
+ * Version:     1.4.4.3
  * Author:      Zemez
  * Author URI:  https://zemez.io/wordpress/
  * Text Domain: cherry-team
