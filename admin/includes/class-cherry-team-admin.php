@@ -31,6 +31,7 @@ class Cherry_Team_Members_Admin {
 	public function __construct() {
 		// Register admin assets
 		add_action( 'admin_init', array( $this, 'register_assets' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'editor_fix' ), 99 );
 	}
 
 	/**
@@ -59,6 +60,27 @@ class Cherry_Team_Members_Admin {
 			'cherry-team-admin-scripts',
 			cherry_team_members()->plugin_url( 'admin/assets/js/cherry-team-admin-scripts.js' ),
 			array( 'jquery', 'cherry-js-core' ),
+			cherry_team_members()->version(),
+			true
+		);
+
+	}
+
+	public function editor_fix() {
+
+		wp_enqueue_style(
+			'cherry-team-editor',
+			cherry_team_members()->plugin_url( 'admin/assets/css/editor.css' ),
+			array(),
+			cherry_team_members()->version()
+		);
+
+		wp_dequeue_script( 'wp-color-picker-alpha' );
+
+		wp_register_script(
+			'wp-color-picker-alpha',
+			cherry_team_members()->plugin_url( 'admin/assets/js/wp-color-picker-alpha.min.js' ),
+			array( 'jquery', 'wp-color-picker' ),
 			cherry_team_members()->version(),
 			true
 		);
