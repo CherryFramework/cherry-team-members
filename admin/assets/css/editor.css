@@ -15,11 +15,18 @@
 	background: none;
 	border-left: none;
 	color: #fff;
-	/*padding: 0 0 0 22px;*/
+	padding: 0 0 0 23px !important;
 	padding: 0;
 }
 .tm-pb-option-container .wp-color-result .color-alpha {
 	top: 8px !important;
 	left: 6px !important;
 	border-radius: 2px;
+}
+.tm-pb-option-container .wp-picker-active {
+	position: relative;
+}
+.tm-pb-option-container .wp-picker-holder {
+	position: absolute;
+	margin-top: 26px;
 }

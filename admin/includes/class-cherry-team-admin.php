@@ -68,6 +68,10 @@ class Cherry_Team_Members_Admin {
 
 	public function editor_fix() {
 
+		if ( ! defined( 'TM_BUILDER_VERSION' ) ) {
+			return;
+		}
+
 		wp_enqueue_style(
 			'cherry-team-editor',
 			cherry_team_members()->plugin_url( 'admin/assets/css/editor.css' ),
@@ -76,8 +80,9 @@ class Cherry_Team_Members_Admin {
 		);
 
 		wp_dequeue_script( 'wp-color-picker-alpha' );
+		wp_deregister_script( 'wp-color-picker-alpha' );
 
-		wp_register_script(
+		wp_enqueue_script(
 			'wp-color-picker-alpha',
 			cherry_team_members()->plugin_url( 'admin/assets/js/wp-color-picker-alpha.min.js' ),
 			array( 'jquery', 'wp-color-picker' ),
