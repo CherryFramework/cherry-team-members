@@ -82,10 +82,12 @@ class Cherry_Team_Members_Admin {
 		wp_dequeue_script( 'wp-color-picker-alpha' );
 		wp_deregister_script( 'wp-color-picker-alpha' );
 
+		wp_enqueue_script( 'wp-color-picker' );
+
 		wp_enqueue_script(
-			'wp-color-picker-alpha',
+			'wp-color-picker-alpha-new',
 			cherry_team_members()->plugin_url( 'admin/assets/js/wp-color-picker-alpha.min.js' ),
-			array( 'jquery', 'wp-color-picker' ),
+			array( 'jquery' ),
 			cherry_team_members()->version(),
 			true
 		);
