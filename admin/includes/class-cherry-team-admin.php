@@ -31,7 +31,7 @@ class Cherry_Team_Members_Admin {
 	public function __construct() {
 		// Register admin assets
 		add_action( 'admin_init', array( $this, 'register_assets' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'editor_fix' ), 99 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'editor_fix' ), 999 );
 	}
 
 	/**
