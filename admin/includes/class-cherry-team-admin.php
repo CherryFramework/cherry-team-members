@@ -72,6 +72,16 @@ class Cherry_Team_Members_Admin {
 			return;
 		}
 
+		global $wp_customize;
+
+		if ( $wp_customize ) {
+			return;
+		}
+
+		if ( ! wp_script_is( 'wp-color-picker-alpha' ) ) {
+			return;
+		}
+
 		wp_enqueue_style(
 			'cherry-team-editor',
 			cherry_team_members()->plugin_url( 'admin/assets/css/editor.css' ),
