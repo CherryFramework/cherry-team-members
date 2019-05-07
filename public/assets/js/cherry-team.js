@@ -1,6 +1,6 @@
 ( function( $ ) {
 
-	"use strict";
+	'use strict';
 
 	var teamMembersPublic = {
 
@@ -39,9 +39,15 @@
 		render: function ( self ) {
 
 			$( self.settings.selectors.main ).each( function() {
-				self.initFilters( $( this ) );
-				self.initLoadMore( $( this ) );
-				self.initPager( $( this ) );
+				var $this = $( this );
+
+				if ( ! $this.data( 'inited' ) ) {
+					$this.data( 'inited', 'true' );
+
+					self.initFilters( $( this ) );
+					self.initLoadMore( $( this ) );
+					self.initPager( $( this ) );
+				}
 			} );
 
 			$( window ).on( 'elementor/frontend/init', self.initElementorWidget );
@@ -58,15 +64,13 @@
 
 					if ( $container.length ) {
 
-						if ( window.elementorFrontend.isEditMode() ) {
-							teamMembersPublic.settings.state.filters = false;
-							teamMembersPublic.settings.state.more    = false;
-							teamMembersPublic.settings.state.pager   = false;
-						}
+						if ( ! $container.data( 'inited' ) ) {
+							$container.data( 'inited', 'true' );
 
-						teamMembersPublic.initFilters( $container );
-						teamMembersPublic.initLoadMore( $container );
-						teamMembersPublic.initPager( $container );
+							teamMembersPublic.initFilters( $container );
+							teamMembersPublic.initLoadMore( $container );
+							teamMembersPublic.initPager( $container );
+						}
 
 					}
 
@@ -98,16 +102,10 @@
 
 		initFilters: function( $item ) {
 
-			if ( false !== teamMembersPublic.settings.state.filters ) {
-				return;
-			}
-
-			teamMembersPublic.settings.state.filters = true;
-
 			var $filter    = $item.find( teamMembersPublic.settings.selectors.filter ),
 				$result    = $item.find( teamMembersPublic.settings.selectors.result ),
 				$container = $item.find( teamMembersPublic.settings.selectors.container ),
-				data       = new Object();
+				data       = {};
 
 			$filter.on( 'click', teamMembersPublic.settings.selectors.filterLink, function( event ) {
 
@@ -163,19 +161,13 @@
 
 		initLoadMore: function( $item ) {
 
-			if ( false !== teamMembersPublic.settings.state.more ) {
-				return;
-			}
-
-			teamMembersPublic.settings.state.more = true;
-
 			$item.on( 'click', teamMembersPublic.settings.selectors.loadMore, function( event ) {
 
 				var $this      = $( this ),
 					$result    = $item.find( teamMembersPublic.settings.selectors.result ),
 					$container = $item.find( teamMembersPublic.settings.selectors.container ),
 					pages      = $container.data( 'pages' ),
-					data       = new Object();
+					data       = {};
 
 				event.preventDefault();
 
@@ -210,19 +202,13 @@
 
 		initPager: function( $item ) {
 
-			if ( false !== teamMembersPublic.settings.state.pager ) {
-				return;
-			}
-
-			teamMembersPublic.settings.state.pager = true;
-
 			$item.on( 'click', teamMembersPublic.settings.selectors.pager + ' a.page-numbers', function( event ) {
 
 				var $this      = $( this ),
 					$result    = $item.find( teamMembersPublic.settings.selectors.result ),
 					$container = $item.find( teamMembersPublic.settings.selectors.container ),
 					pages      = $container.data( 'pages' ),
-					data       = new Object();
+					data       = {};
 
 				event.preventDefault();
 
