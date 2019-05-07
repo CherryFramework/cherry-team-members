@@ -3,8 +3,8 @@
 Contributors: TemplateMonster 2002
 Tags: custom post type, team, cherry-framework, elementor, elementor builder
 Requires at least: 4.7
-Tested up to: 4.9
-Stable tag: 1.4.5
+Tested up to: 5.1.0
+Stable tag: 1.4.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
